@@ -16,7 +16,7 @@ use App\Users\User;
  */
 class UserController extends BaseController {
 
-    private $userService;
+    private UserService $userService;
 
     public function __construct(UserService $userService) {
         parent::__construct();
