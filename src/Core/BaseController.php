@@ -8,7 +8,7 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class BaseController extends AbstractController {
-// hi
+
     private $serializer;
 
     public function __construct() {
