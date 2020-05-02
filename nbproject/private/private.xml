@@ -3,10 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/symphart/src/Users/UserRepository.php</file>
-            <file>file:/C:/xampp/htdocs/symphart/src/Users/UserController.php</file>
-            <file>file:/C:/xampp/htdocs/symphart/src/Users/UserService.php</file>
-            <file>file:/C:/xampp/htdocs/symphart/src/Core/BaseController.php</file>
+            <file>file:/C:/xampp/htdocs/ng-crud-app-back-end-php/src/Users/User.php</file>
         </group>
     </open-files>
 </project-private>
