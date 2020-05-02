@@ -11,3 +11,5 @@ php bin/console make:entity --> name of entity <--
 
 Package zendframework/zend-code is abandoned, you should avoid using it. Use laminas/laminas-code instead.
 Package zendframework/zend-eventmanager is abandoned, you should avoid using it. Use laminas/laminas-eventmanager instead.
+
+test
