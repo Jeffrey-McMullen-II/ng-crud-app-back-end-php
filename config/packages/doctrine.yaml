@@ -1,0 +1,19 @@
+doctrine:
+    dbal:
+        url: 'mysql://root:@127.0.0.1:3306/crud_database?serverVersion=10.4.11'
+
+        ### DATABASES ###
+            #mysql://jaygame2_guest:guest@127.0.0.1:3306/jaygame2_dtccjaygames?serverVersion=10.0.38
+            #mysql://root:@127.0.0.1:3306/crud_database?serverVersion=10.4.11
+        ### DATABASES ###
+    orm:
+        auto_generate_proxy_classes: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+            App:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src'
+                prefix: 'App'
+                alias: App
