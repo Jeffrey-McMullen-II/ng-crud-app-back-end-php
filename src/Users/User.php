@@ -15,22 +15,22 @@ class User {
      * @ORM\GeneratedValue()
      * @ORM\Column(name="id", type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(name="email", type="text")
      */
-    private $email;
+    private string $email;
 
     /**
      * @ORM\Column(name="first_name", type="text")
      */
-    private $firstName;
+    private string $firstName;
 
     /**
      * @ORM\Column(name="last_name", type="text")
      */
-    private $lastName;
+    private string $lastName;
 
     
 
