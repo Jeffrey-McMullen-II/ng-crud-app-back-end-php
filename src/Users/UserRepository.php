@@ -34,7 +34,7 @@ class UserRepository extends ServiceEntityRepository {
         $mapping->addFieldResult('u', 'last_name', 'lastName');
         $mapping->addFieldResult('u', 'email', 'email');
         
-        return $this->_em->createNativeQuery('SELECT * FROM user ORDER BY id ASC LIMIT 100', $mapping)->getResult();
+        return $this->_em->createNativeQuery('SELECT * FROM users ORDER BY id ASC LIMIT 100', $mapping)->getResult();
     }
 
     function findAllByFirstNameNativeQuery(string $name): array {
@@ -46,7 +46,7 @@ class UserRepository extends ServiceEntityRepository {
         $mapping->addFieldResult('u', 'email', 'email');
         
         $query = $this->_em->createNativeQuery(
-            'SELECT * FROM user ' . 
+            'SELECT * FROM users ' . 
             'WHERE first_name = :firstName ' .
             'ORDER BY id ASC', $mapping);
         $query->setParameter('firstName', $name);
@@ -68,7 +68,7 @@ class UserRepository extends ServiceEntityRepository {
         $conn = $this->_em->getConnection();
 
         $sql = 'SELECT u.id, u.first_name AS firstName, u.last_name AS lastName, u.email
-                FROM User u
+                FROM Users u
                 WHERE u.first_name = :firstName
                 ORDER BY u.first_name ASC';
                 
@@ -81,7 +81,7 @@ class UserRepository extends ServiceEntityRepository {
     function getCountOfUsers(): int {
         $conn = $this->_em->getConnection();
 
-        $sql = 'SELECT COUNT(*) AS userCount FROM User';
+        $sql = 'SELECT COUNT(*) AS userCount FROM Users';
                 
         $stmt = $conn->prepare($sql);
         $stmt->execute();
@@ -99,7 +99,7 @@ class UserRepository extends ServiceEntityRepository {
         $mapping->addFieldResult('u', 'email', 'email');
         
         $query = $this->_em->createNativeQuery(
-            'SELECT * FROM user 
+            'SELECT * FROM users 
              ORDER BY id ASC
              LIMIT 1', $mapping);
 
