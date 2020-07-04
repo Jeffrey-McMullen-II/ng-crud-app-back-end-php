@@ -5,12 +5,17 @@ namespace App\Users;
 use App\Users\User;
 use App\Users\UserRepository;
 
+use App\Core\Logs\LogService;
+use App\Core\Logs\LogTypesEnum;
+
 class UserService {
 
     private UserRepository $userRepository;
+    private LogService $logService;
 
-    public function __construct(UserRepository $userRepository) {
+    public function __construct(UserRepository $userRepository, LogService $logService) {
         $this->userRepository = $userRepository;
+        $this->logService = $logService;
     }
 
     function findUserById(int $id): User {
@@ -41,6 +46,8 @@ class UserService {
     }
 
     function deleteUserById(int $id): User {
+        $this->logService->saveLog(LogTypesEnum::INFO, "Deleting user with id: " . $id);
+        
         $user = $this->findUserById($id);
         $this->userRepository->remove($user);
         return $user;

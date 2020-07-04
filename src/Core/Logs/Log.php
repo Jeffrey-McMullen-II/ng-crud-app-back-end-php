@@ -2,6 +2,8 @@
 
 namespace App\Core\Logs;
 
+use DateTime;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,13 +32,14 @@ class Log {
     /**
      * @ORM\Column(name="log_date", type="datetime")
      */
-    private ?DateTime $logDate;
+    private DateTime $logDate;
     
     
     
     public function __construct(int $logTypeId, string $description) {
         $this->logTypeId = $logTypeId;
         $this->description = $description;
+        $this->logDate = new DateTime();
     }
     
 
@@ -65,10 +68,10 @@ class Log {
         $this->description = $description;
     }
     
-    public function getLogDate(): ?DateTime {
+    public function getLogDate(): DateTime {
         return $this->logDate;
     }
-
+    
     public function setLogDate(DateTime $logDate) {
         $this->logDate = $logDate;
     }
