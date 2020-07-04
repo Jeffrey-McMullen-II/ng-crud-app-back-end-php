@@ -34,7 +34,7 @@ class User {
 
     
 
-    public function getId() {
+    public function getId(): ?int {
         return $this->id;
     }
 
@@ -42,7 +42,7 @@ class User {
         $this->id = $id;
     }
 
-    public function getEmail() {
+    public function getEmail(): string {
         return $this->email;
     }
 
@@ -50,7 +50,7 @@ class User {
         $this->email = $email;
     }
 
-    public function getFirstName() {
+    public function getFirstName(): string {
         return $this->firstName;
     }
 
@@ -58,7 +58,7 @@ class User {
         $this->firstName = $firstName;
     }
 
-    public function getLastName() {
+    public function getLastName(): string {
         return $this->lastName;
     }
 
