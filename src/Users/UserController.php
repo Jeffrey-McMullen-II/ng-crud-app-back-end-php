@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-use App\Core\BaseController;
+use App\Core\Controllers\BaseController;
 use App\Users\User;
 use App\Users\UserService;
 
