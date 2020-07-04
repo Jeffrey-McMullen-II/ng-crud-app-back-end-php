@@ -1,20 +1,20 @@
 <?php declare(strict_types = 1);
 
-namespace App\Core\ErrorLogs;
+namespace App\Core\Logs;
 
-use App\Core\ErrorLogs\ErrorLogRepository;
-use App\Core\ErrorLogs\ErrorLog;
+use App\Core\Logs\LogRepository;
+use App\Core\Logs\Log;
 
-class ErrorLogService {
+class LogService {
 
-    private ErrorLogRepository $errorLogRepository;
+    private LogRepository $LogRepository;
 
-    public function __construct(ErrorLogRepository $errorLogRepository) {
-        $this->errorLogRepository = $errorLogRepository;
+    public function __construct(LogRepository $LogRepository) {
+        $this->LogRepository = $LogRepository;
     }
     
-    public function logError(string $message) {
-        $this->errorLogRepository->persist(new ErrorLog($message));
+    public function saveLog(int $logTypeId, string $message) {
+        $this->LogRepository->persist(new Log($logTypeId, $message));
     }
     
     /* TODO implment this

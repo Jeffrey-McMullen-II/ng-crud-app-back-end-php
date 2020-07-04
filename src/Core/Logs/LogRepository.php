@@ -1,26 +1,26 @@
 <?php declare(strict_types = 1);
 
-namespace App\Core\ErrorLogs;
+namespace App\Core\Logs;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
-use App\Core\ErrorLogs\ErrorLog;
+use App\Core\Logs\Log;
 
 /**
- * @method ErrorLog|null find($id, $lockMode = null, $lockVersion = null)
- * @method ErrorLog|null findOneBy(array $criteria, array $orderBy = null)
- * @method ErrorLog[]    findAll()
- * @method ErrorLog[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Log|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Log|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Log[]    findAll()
+ * @method Log[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ErrorLogRepository extends ServiceEntityRepository {
+class LogRepository extends ServiceEntityRepository {
 
     public function __construct(ManagerRegistry $registry) {
-        parent::__construct($registry, ErrorLog::class);
+        parent::__construct($registry, Log::class);
     }
 
-    function persist(ErrorLog $errorLog) {
-        $this->_em->persist($errorLog);
+    function persist(Log $Log) {
+        $this->_em->persist($Log);
         $this->_em->flush();
     }
 }
