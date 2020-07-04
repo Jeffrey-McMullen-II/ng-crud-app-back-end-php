@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace App\Core;
+namespace App\Core\Controllers;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
