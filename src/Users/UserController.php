@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Core\BaseController;
-use App\Users\UserService;
 use App\Users\User;
+use App\Users\UserService;
 
 /**
  * @Route("/api/users")
