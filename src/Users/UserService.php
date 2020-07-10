@@ -2,11 +2,9 @@
 
 namespace App\Users;
 
+use App\Core\Logs\LogService;
 use App\Users\User;
 use App\Users\UserRepository;
-
-use App\Core\Logs\LogService;
-use App\Core\Logs\LogTypesEnum;
 
 class UserService {
 
@@ -46,7 +44,7 @@ class UserService {
     }
 
     function deleteUserById(int $id): User {
-        $this->logService->saveLog(LogTypesEnum::INFO, "Deleting user with id: " . $id);
+        $this->logService->logInfo("Deleting user with id: " . $id);
         
         $user = $this->findUserById($id);
         $this->userRepository->remove($user);

@@ -2,8 +2,9 @@
 
 namespace App\Core\Logs;
 
-use App\Core\Logs\LogRepository;
 use App\Core\Logs\Log;
+use App\Core\Logs\LogRepository;
+use App\Core\Logs\LogTypesEnum;
 
 class LogService {
 
@@ -13,8 +14,12 @@ class LogService {
         $this->LogRepository = $LogRepository;
     }
     
-    public function saveLog(int $logTypeId, string $message) {
-        $this->LogRepository->persist(new Log($logTypeId, $message));
+    public function logInfo(string $message) {
+        $this->LogRepository->persist(new Log(LogTypesEnum::INFO, $message));
+    }
+    
+    public function logError(string $message) {
+        $this->LogRepository->persist(new Log(LogTypesEnum::ERROR, $message));
     }
     
     /* TODO implment this
