@@ -18,8 +18,8 @@ class ExceptionService {
         throw new BadRequestHttpException($message);
     }
     
-    public function throwAndLogBadRequestHttpException(string $message) {
-        $this->logService->logError($message);
+    public function logAndThrowBadRequestHttpException(string $message) {
+        $this->logService->logError("Bad Request Http Exception: " . $message);
         throw new BadRequestHttpException($message);
     }
 }
