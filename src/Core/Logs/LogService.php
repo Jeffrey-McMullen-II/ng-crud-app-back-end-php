@@ -25,9 +25,4 @@ class LogService {
     public function logError(string $message) {
         $this->LogRepository->persist(new Log(LogTypesEnum::ERROR, $message));
     }
-    
-    /* TODO implment this
-     * use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-     * throw new BadRequestHttpException("Not allowed to execute");
-     */
 }
