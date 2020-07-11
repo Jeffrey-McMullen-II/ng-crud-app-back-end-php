@@ -14,6 +14,10 @@ class LogService {
         $this->LogRepository = $LogRepository;
     }
     
+    public function logDebug(string $message) {
+        $this->LogRepository->persist(new Log(LogTypesEnum::DEBUG, $message));
+    }
+    
     public function logInfo(string $message) {
         $this->LogRepository->persist(new Log(LogTypesEnum::INFO, $message));
     }

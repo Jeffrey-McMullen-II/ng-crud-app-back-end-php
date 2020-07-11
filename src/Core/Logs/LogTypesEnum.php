@@ -4,6 +4,7 @@ namespace App\Core\Logs;
 
 abstract class LogTypesEnum {
     
-    const INFO = 1;
-    const ERROR = 2;
+    const DEBUG = 1;
+    const INFO = 2;
+    const ERROR = 3;
 }
