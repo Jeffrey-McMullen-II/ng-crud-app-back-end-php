@@ -81,7 +81,7 @@ class UserRepository extends ServiceEntityRepository {
     function getCountOfUsers(): int {
         $conn = $this->_em->getConnection();
 
-        $sql = 'SELECT COUNT(*) AS userCount FROM Users';
+        $sql = 'SELECT COUNT(*) AS userCount FROM users';
                 
         $stmt = $conn->prepare($sql);
         $stmt->execute();
