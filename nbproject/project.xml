@@ -3,7 +3,7 @@
     <type>org.netbeans.modules.php.project</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/php-project/1">
-            <name>ng-crud-app-back-end-php</name>
+            <name>ng-crud-app-backend-php</name>
         </data>
     </configuration>
 </project>
