@@ -8,8 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="App\Users\UserRepository")
  */
-class User {
-    
+class User
+{
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -34,35 +34,43 @@ class User {
 
     
 
-    public function getId(): ?int {
+    public function getId(): ?int
+    {
         return $this->id;
     }
 
-    public function setId(int $id) {
+    public function setId(int $id)
+    {
         $this->id = $id;
     }
 
-    public function getEmail(): string {
+    public function getEmail(): string
+    {
         return $this->email;
     }
 
-    public function setEmail(string $email) {
+    public function setEmail(string $email)
+    {
         $this->email = $email;
     }
 
-    public function getFirstName(): string {
+    public function getFirstName(): string
+    {
         return $this->firstName;
     }
 
-    public function setFirstName(string $firstName) {
+    public function setFirstName(string $firstName)
+    {
         $this->firstName = $firstName;
     }
 
-    public function getLastName(): string {
+    public function getLastName(): string
+    {
         return $this->lastName;
     }
 
-    public function setLastName(string $lastName) {
+    public function setLastName(string $lastName)
+    {
         $this->lastName = $lastName;
     }
 }

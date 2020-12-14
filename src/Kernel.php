@@ -19,7 +19,8 @@ class Kernel extends BaseKernel
     {
         $contents = require $this->getProjectDir().'/config/bundles.php';
         foreach ($contents as $class => $envs) {
-            if ($envs[$this->environment] ?? $envs['all'] ?? false) {
+            if ($envs[$this->environment] ?? $envs['all'] ?? false)
+            {
                 yield new $class();
             }
         }

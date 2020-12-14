@@ -13,13 +13,15 @@ use App\Core\Logs\Log;
  * @method Log[]    findAll()
  * @method Log[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class LogRepository extends ServiceEntityRepository {
-
-    public function __construct(ManagerRegistry $registry) {
+class LogRepository extends ServiceEntityRepository
+{
+    public function __construct(ManagerRegistry $registry)
+    {
         parent::__construct($registry, Log::class);
     }
 
-    function persist(Log $Log) {
+    function persist(Log $Log)
+    {
         $this->_em->persist($Log);
         $this->_em->flush();
     }

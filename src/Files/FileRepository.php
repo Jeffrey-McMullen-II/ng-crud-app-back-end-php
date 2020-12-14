@@ -13,23 +13,27 @@ use App\Files\File;
  * @method File[]    findAll()
  * @method File[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class FileRepository extends ServiceEntityRepository {
-
-    public function __construct(ManagerRegistry $registry) {
+class FileRepository extends ServiceEntityRepository
+{
+    public function __construct(ManagerRegistry $registry)
+    {
         parent::__construct($registry, File::class);
     }
 
-    function persist($file) {
+    function persist($file)
+    {
         $this->_em->persist($file);
         $this->_em->flush();
     }
 
-    function merge($file) {
+    function merge($file)
+    {
         $this->_em->merge($file);
         $this->_em->flush();
     }
 
-    function remove($file) {
+    function remove($file)
+    {
         $this->_em->remove($file);
         $this->_em->flush();
     }

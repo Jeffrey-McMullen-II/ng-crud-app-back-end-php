@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="logs")
  * @ORM\Entity(repositoryClass="App\Core\Logs\LogRepository")
  */
-class Log {
-    
+class Log
+{
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -36,7 +36,8 @@ class Log {
     
     
     
-    public function __construct(int $logTypeId, string $description) {
+    public function __construct(int $logTypeId, string $description)
+    {
         $this->logTypeId = $logTypeId;
         $this->description = $description;
         $this->logDate = new DateTime();
@@ -44,35 +45,43 @@ class Log {
     
 
     
-    public function getId(): int {
+    public function getId(): int
+    {
         return $this->id;
     }
 
-    public function setId(int $id) {
+    public function setId(int $id)
+    {
         $this->id = $id;
     }
     
-    public function getLogTypeId(): int {
+    public function getLogTypeId(): int
+    {
         return $this->logTypeId;
     }
     
-    public function setLogTypeId(int $logTypeId) {
+    public function setLogTypeId(int $logTypeId)
+    {
         $this->logTypeId = $logTypeId;
     }
 
-    public function getDescription(): string {
+    public function getDescription(): string
+    {
         return $this->description;
     }
 
-    public function setDscription(string $description) {
+    public function setDscription(string $description)
+    {
         $this->description = $description;
     }
     
-    public function getLogDate(): DateTime {
+    public function getLogDate(): DateTime
+    {
         return $this->logDate;
     }
     
-    public function setLogDate(DateTime $logDate) {
+    public function setLogDate(DateTime $logDate)
+    {
         $this->logDate = $logDate;
     }
 }

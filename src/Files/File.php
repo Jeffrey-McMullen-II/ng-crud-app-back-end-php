@@ -8,8 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="files")
  * @ORM\Entity(repositoryClass="App\Files\FileRepository")
  */
-class File {
-    
+class File
+{
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -34,35 +34,43 @@ class File {
 
 
 
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function setId($id) {
+    public function setId($id)
+    {
         $this->id = $id;
     }
     
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
     }
 
-    public function getType() {
+    public function getType()
+    {
         return $this->type;
     }
 
-    public function setType($type) {
+    public function setType($type)
+    {
         $this->type = $type;
     }
 
-    public function getFile() {
+    public function getFile()
+    {
         return $this->file;
     }
 
-    public function setFile($file) {
+    public function setFile($file)
+    {
         $this->file = $file;
     }
 }

@@ -14,11 +14,12 @@ use App\Users\UserService;
 /**
  * @Route("/api/users")
  */
-class UserController extends BaseController {
-
+class UserController extends BaseController
+{
     private UserService $userService;
 
-    public function __construct(UserService $userService) {
+    public function __construct(UserService $userService)
+    {
         parent::__construct();
         $this->userService = $userService;
     }
@@ -27,7 +28,8 @@ class UserController extends BaseController {
      * @Route("/first-name/ascending")
      * @Method("GET")
      */
-    function findAllUsersOrderByFirstName() {
+    function findAllUsersOrderByFirstName()
+    {
         $users = $this->userService->findAllUsersOrderByFirstName();
         
         return new Response($this->objToJson($users));
@@ -37,7 +39,8 @@ class UserController extends BaseController {
      * @Route
      * @Method("POST")
      */
-    function createUser(Request $request) {
+    function createUser(Request $request)
+    {
         $user = $this->jsonToObj($request->getContent(), User::class);
         
         $this->userService->createUser($user);
@@ -49,7 +52,8 @@ class UserController extends BaseController {
      * @Route
      * @Method("PUT")
      */
-    function updateUser(Request $request) {
+    function updateUser(Request $request)
+    {
         $user = $this->jsonToObj($request->getContent(), User::class);
 
         $this->userService->updateUser($user);
@@ -61,7 +65,8 @@ class UserController extends BaseController {
      * @Route("/{id}")
      * @Method("DELETE")
      */
-    function deleteUserById(int $id) {
+    function deleteUserById(int $id)
+    {
         $user = $this->userService->deleteUserById($id);
 
         return new Response($this->objToJson($user));
