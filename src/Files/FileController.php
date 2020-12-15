@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Core\Controllers\BaseController;
+use App\Core\JsonMappers\JsonMapper;
 use App\Files\FileService;
 
 /**
@@ -17,9 +18,10 @@ class FileController extends BaseController
 {
     private FileService $fileService;
 
-    public function __construct(FileService $fileService)
+    public function __construct(JsonMapper $jsonMapper, FileService $fileService)
     {
-        parent::__construct();
+        parent::__construct($jsonMapper);
+        
         $this->fileService = $fileService;
     }
 
@@ -31,7 +33,7 @@ class FileController extends BaseController
     {
         $file = $this->fileService->findFileByFileId($fileId);
 
-        return $file !== null ? new Response($this->objToJson($file)) : new Response(null);
+        return $file !== null ? new Response($this->toJson($file)) : new Response(null);
     }
 
     /**
@@ -40,11 +42,11 @@ class FileController extends BaseController
      */
     function createFile(Request $request)
     {
-        $file = $this->jsonToObj($request->getContent(), File::class);
+        $file = $this->toObject($request->getContent(), File::class);
         
         $this->fileService->createFile($file);
         
-        return new Response($this->objToJson($file));
+        return new Response($this->toJson($file));
     }
 
     /**
@@ -53,7 +55,7 @@ class FileController extends BaseController
      */
     function updateFile(Request $request)
     {
-        $file = $this->jsonToObj($request->getContent(), File::class);
+        $file = $this->toObject($request->getContent(), File::class);
 
         $this->fileService->updateFile($file);
  

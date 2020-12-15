@@ -3,26 +3,25 @@
 namespace App\Core\Controllers;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
+
+use App\Core\JsonMappers\JsonMapper;
 
 class BaseController extends AbstractController
 {
-    private Serializer $serializer;
+    private JsonMapper $jsonMapper;
 
-    public function __construct()
+    public function __construct(JsonMapper $jsonMapper)
     {
-        $this->serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
+        $this->jsonMapper = $jsonMapper;
     }
 
-    function jsonToObj($json, $class)
+    function toObject($jsonContents, $className)
     {
-        return $this->serializer->deserialize($json, $class, 'json');
+        return $this->jsonMapper->toObject($jsonContents, $className);
     }
 
-    function objToJson($obj)
+    function toJson($object)
     {
-        return $this->serializer->serialize($obj, 'json');
+        return $this->jsonMapper->toJson($object);
     }
 }
