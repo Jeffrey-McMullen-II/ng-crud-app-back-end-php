@@ -13,64 +13,64 @@ class User
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="user_id", type="integer")
      */
-    private ?int $id;
+    private ?int $userId;
 
     /**
-     * @ORM\Column(name="email", type="text")
+     * @ORM\Column(name="user_email", type="text")
      */
-    private string $email;
+    private string $userEmail;
 
     /**
-     * @ORM\Column(name="first_name", type="text")
+     * @ORM\Column(name="user_first_name", type="text")
      */
-    private string $firstName;
+    private string $userFirstName;
 
     /**
-     * @ORM\Column(name="last_name", type="text")
+     * @ORM\Column(name="user_last_name", type="text")
      */
-    private string $lastName;
+    private string $userLastName;
 
     
 
-    public function getId(): ?int
+    public function getUserId(): ?int
     {
-        return $this->id;
+        return $this->userId;
     }
 
-    public function setId(int $id)
+    public function setUserId(int $userId)
     {
-        $this->id = $id;
+        $this->userId = $userId;
     }
 
-    public function getEmail(): string
+    public function getUserEmail(): string
     {
-        return $this->email;
+        return $this->userEmail;
     }
 
-    public function setEmail(string $email)
+    public function setUserEmail(string $userEmail)
     {
-        $this->email = $email;
+        $this->userEmail = $userEmail;
     }
 
-    public function getFirstName(): string
+    public function getUserFirstName(): string
     {
-        return $this->firstName;
+        return $this->userFirstName;
     }
 
-    public function setFirstName(string $firstName)
+    public function setUserFirstName(string $userFirstName)
     {
-        $this->firstName = $firstName;
+        $this->userFirstName = $userFirstName;
     }
 
-    public function getLastName(): string
+    public function getUserLastName(): string
     {
-        return $this->lastName;
+        return $this->userLastName;
     }
 
-    public function setLastName(string $lastName)
+    public function setUserLastName(string $userLastName)
     {
-        $this->lastName = $lastName;
+        $this->userLastName = $userLastName;
     }
 }

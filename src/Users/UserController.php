@@ -62,12 +62,12 @@ class UserController extends BaseController
     }
 
     /**
-     * @Route("/{id}")
+     * @Route("/{userId}")
      * @Method("DELETE")
      */
-    function deleteUserById(int $id)
+    function deleteUserByUserId(int $userId)
     {
-        $user = $this->userService->deleteUserById($id);
+        $user = $this->userService->deleteUserByUserId($userId);
 
         return new Response($this->objToJson($user));
     }

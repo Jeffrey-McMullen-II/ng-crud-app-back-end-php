@@ -13,17 +13,17 @@ class FileService
         $this->fileRepository = $fileRepository;
     }
 
-    function findFileById($id)
+    function findFileByFileId($fileId)
     {
-        $file = $this->fileRepository->find($id);
+        $file = $this->fileRepository->find($fileId);
 
         if ($file === null)
         {
-            return new Response(null);
+            return null;
         }
 
-        $streamContents = stream_get_contents($file->getFile(), -1, -1);
-        $file->setFile($streamContents);
+        $streamContents = stream_get_contents($file->getFileContents(), -1, -1);
+        $file->setFileContents($streamContents);
 
         return $file;
     }
@@ -38,9 +38,15 @@ class FileService
         $this->fileRepository->merge($file);
     }
 
-    function deleteFileById($id)
+    function deleteFileByFileId($fileId)
     {        
-        $file = $this->findFileById($id);
+        $file = $this->findFileByFileId($fileId);
+        
+        if ($file === null)
+        {
+            return null;
+        }
+        
         $this->fileRepository->remove($file);
         return $file;
     }
