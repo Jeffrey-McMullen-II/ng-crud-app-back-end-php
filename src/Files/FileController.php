@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Core\Controllers\BaseController;
-use App\Core\JsonMappers\JsonMapper;
+use App\Core\Mappers\JsonMapper;
 use App\Files\FileService;
 
 /**

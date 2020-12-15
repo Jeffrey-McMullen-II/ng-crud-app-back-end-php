@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace App\Core\JsonMappers;
+namespace App\Core\Mappers;
 
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;

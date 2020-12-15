@@ -4,7 +4,7 @@ namespace App\Core\Controllers;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-use App\Core\JsonMappers\JsonMapper;
+use App\Core\Mappers\JsonMapper;
 
 class BaseController extends AbstractController
 {
