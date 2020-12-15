@@ -24,14 +24,14 @@ class FileController extends BaseController
     }
 
     /**
-     * @Route("/{id}")
+     * @Route("/{fileId}")
      * @Method("GET")
      */
-    function findFileById($id)
+    function findFileByFileId($fileId)
     {
-        $file = $this->fileService->findFileById($id);
+        $file = $this->fileService->findFileByFileId($fileId);
 
-        return new Response($this->objToJson($file));
+        return $file !== null ? new Response($this->objToJson($file)) : new Response(null);
     }
 
     /**
@@ -61,12 +61,12 @@ class FileController extends BaseController
     }
 
     /**
-     * @Route("/{id}")
+     * @Route("/{fileId}")
      * @Method("DELETE")
      */
-    function deleteFileById($id)
+    function deleteFileByFileId($fileId)
     {
-        $file = $this->fileService->deleteFileById($id);
+        $file = $this->fileService->deleteFileByFileId($fileId);
 
         return new Response($file);
     }

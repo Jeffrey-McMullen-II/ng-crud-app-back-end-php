@@ -13,64 +13,64 @@ class File
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="file_id", type="integer")
      */
-    private $id;
+    private $fileId;
     
     /**
-     * @ORM\Column(name="name", type="text")
+     * @ORM\Column(name="file_name", type="text")
      */
-    private $name;
+    private $fileName;
 
     /**
-     * @ORM\Column(name="type", type="text")
+     * @ORM\Column(name="file_type", type="text")
      */
-    private $type;
+    private $fileType;
 
     /**
-     * @ORM\Column(name="file", type="blob")
+     * @ORM\Column(name="file_contents", type="blob")
      */
-    private $file;
+    private $fileContents;
 
 
 
-    public function getId()
+    public function getFileId()
     {
-        return $this->id;
+        return $this->fileId;
     }
 
-    public function setId($id)
+    public function setFileId($fileId)
     {
-        $this->id = $id;
+        $this->fileId = $fileId;
     }
     
-    public function getName()
+    public function getFileName()
     {
-        return $this->name;
+        return $this->fileName;
     }
 
-    public function setName($name)
+    public function setFileName($fileName)
     {
-        $this->name = $name;
+        $this->fileName = $fileName;
     }
 
-    public function getType()
+    public function getFileType()
     {
-        return $this->type;
+        return $this->fileType;
     }
 
-    public function setType($type)
+    public function setFileType($fileType)
     {
-        $this->type = $type;
+        $this->fileType = $fileType;
     }
 
-    public function getFile()
+    public function getFileContents()
     {
-        return $this->file;
+        return $this->fileContents;
     }
 
-    public function setFile($file)
+    public function setFileContents($fileContents)
     {
-        $this->file = $file;
+        $this->fileContents = $fileContents;
     }
 }

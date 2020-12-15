@@ -15,64 +15,64 @@ class Log
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="log_id", type="integer")
      */
-    private ?int $id;
-    
+    private ?int $logId;
+
     /**
      * @ORM\Column(name="log_type_id", type="integer")
      */
     private int $logTypeId;
 
     /**
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="log_message", type="text")
      */
-    private string $description;
+    private string $logMessage;
     
     /**
      * @ORM\Column(name="log_date", type="datetime")
      */
     private DateTime $logDate;
-    
-    
-    
-    public function __construct(int $logTypeId, string $description)
+
+
+
+    public function __construct(int $logTypeId, string $logMessage)
     {
         $this->logTypeId = $logTypeId;
-        $this->description = $description;
+        $this->logMessage = $logMessage;
         $this->logDate = new DateTime();
     }
-    
 
-    
-    public function getId(): int
+
+
+    public function getLogId(): int
     {
-        return $this->id;
+        return $this->logId;
     }
 
-    public function setId(int $id)
+    public function setLogId(int $logId)
     {
-        $this->id = $id;
+        $this->logId = $logId;
     }
-    
+
     public function getLogTypeId(): int
     {
         return $this->logTypeId;
     }
-    
+
     public function setLogTypeId(int $logTypeId)
     {
         $this->logTypeId = $logTypeId;
     }
-
-    public function getDescription(): string
+    
+    public function getLogMessage(): string
     {
-        return $this->description;
+        return $this->logMessage;
     }
 
-    public function setDscription(string $description)
+    public function setLogMessage(string $logMessage)
     {
-        $this->description = $description;
+        $this->logMessage = $logMessage;
     }
     
     public function getLogDate(): DateTime
