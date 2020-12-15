@@ -15,7 +15,7 @@ class JsonMapper
         $this->serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
     }
 
-    public function toObject($jsonContents, $className)
+    function toObject($jsonContents, $className)
     {
         return $this->serializer->deserialize($jsonContents, $className, 'json');
     }
