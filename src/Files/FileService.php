@@ -17,10 +17,7 @@ class FileService
     {
         $file = $this->fileRepository->find($fileId);
 
-        if ($file === null)
-        {
-            return null;
-        }
+        if ($file === null) { return null; }
 
         $streamContents = stream_get_contents($file->getFileContents(), -1, -1);
         $file->setFileContents($streamContents);
@@ -42,10 +39,7 @@ class FileService
     {        
         $file = $this->findFileByFileId($fileId);
         
-        if ($file === null)
-        {
-            return null;
-        }
+        if ($file === null) { return null; }
         
         $this->fileRepository->remove($file);
         return $file;
