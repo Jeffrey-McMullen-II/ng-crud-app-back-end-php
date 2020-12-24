@@ -2,6 +2,7 @@
 
 namespace App\Files;
 
+use App\Files\File;
 use App\Files\FileRepository;
 
 class FileService
@@ -29,6 +30,42 @@ class FileService
     {
         $this->fileRepository->persist($file);
     }
+    
+    function transferFiles()
+    {
+        $directoryPath = "../../files/";
+        
+        $fileCount = 0;
+        $filesTransferred = "";
+
+        if (($directory = opendir($directoryPath)))
+        {
+            while (false !== ($fileName = readdir($directory)))
+            {
+                if (!in_array($fileName, [".", ".."]))
+                {
+                    $fileCount++;
+                    $filesTransferred .= $fileName . "<br>";
+                    
+                    $fileType = mime_content_type($directoryPath . $fileName);
+                    $fileContent = base64_encode(file_get_contents($directoryPath . $fileName));
+                    
+                    $file = new File();
+                    $file->setFileName($fileName);
+                    $file->setFileType($fileType);
+                    $file->setFileContents('data: ' . $fileType . ';base64,' . $fileContent);
+                    
+                    $this->createFile($file);
+                    
+                    unlink($directoryPath . $fileName);
+                }
+            }
+        }
+        
+        closedir($directory);
+        
+        return $fileCount . " file(s) transferred <br>" . $filesTransferred;
+    }
 
     function updateFile($file)
     {
@@ -36,7 +73,7 @@ class FileService
     }
 
     function deleteFileByFileId($fileId)
-    {        
+    {
         $file = $this->findFileByFileId($fileId);
         
         if ($file === null) { return null; }

@@ -48,6 +48,15 @@ class FileController extends BaseController
         
         return new Response($this->toJson($file));
     }
+    
+    /**
+     * @Route("/transfer")
+     * @Method("POST")
+     */
+    function transferFiles()
+    {
+        return new Response($this->fileService->transferFiles());
+    }
 
     /**
      * @Route
