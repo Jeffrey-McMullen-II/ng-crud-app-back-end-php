@@ -19,6 +19,32 @@ class FileRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, File::class);
     }
+    
+    function findFileCount()
+    {        
+        $conn = $this->_em->getConnection();
+
+        $sql = 'SELECT COUNT(*) AS fileCount FROM files';
+                
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+    
+        $results = $stmt->fetchAll();
+        $fileCount = $results[0]['fileCount'];
+        return intval($fileCount);
+    }
+    
+    function findFilesBy(int $limit, int $offset)
+    {
+        $conn = $this->_em->getConnection();
+
+        $sql = 'SELECT * FROM files LIMIT ' . $limit . ', ' . $offset;
+                
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+    
+        return $stmt->fetchAll();
+    }
 
     function persist($file)
     {

@@ -4,6 +4,7 @@ namespace App\Files;
 
 use App\Files\File;
 use App\Files\FileRepository;
+use App\Core\Pagination\PaginationResponse;
 
 class FileService
 {
@@ -24,6 +25,16 @@ class FileService
         $file->setFileContents($streamContents);
 
         return $file;
+    }
+    
+    function findFilesBy($paginationRequest)
+    {               
+        $fileCount = $this->fileRepository->findFileCount();
+        $limit = $paginationRequest->getLimit($fileCount);
+        
+        $files = $this->fileRepository->findFilesBy($limit, $paginationRequest->getResultsPerPage());
+        
+        return new PaginationResponse($paginationRequest->getPageCount($fileCount), $files);
     }
 
     function createFile($file)
@@ -64,7 +75,7 @@ class FileService
         
         closedir($directory);
         
-        return $fileCount . " file(s) transferred <br>" . $filesTransferred;
+        return $fileCount . ' file(s) transferred <br>' . $filesTransferred;
     }
 
     function updateFile($file)
