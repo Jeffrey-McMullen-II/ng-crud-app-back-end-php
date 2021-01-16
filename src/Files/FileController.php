@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Core\Controllers\BaseController;
 use App\Core\Mappers\JsonMapper;
 use App\Files\FileService;
+use App\Core\Pagination\PaginationRequest;
 
 /**
  * @Route("/api/files")
@@ -34,6 +35,19 @@ class FileController extends BaseController
         $file = $this->fileService->findFileByFileId($fileId);
 
         return $file !== null ? new Response($this->toJson($file)) : new Response(null);
+    }
+    
+    /**
+     * @Route("/by-pagination-request")
+     * @Method("POST")
+     */
+    function findFilesBy(Request $request)
+    {
+        $paginationRequest = $this->toObject($request->getContent(), PaginationRequest::class);
+        
+        $paginationResponse = $this->fileService->findFilesBy($paginationRequest);
+        
+        return new Response($this->toJson($paginationResponse));
     }
 
     /**
