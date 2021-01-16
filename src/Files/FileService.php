@@ -21,18 +21,22 @@ class FileService
 
         if ($file === null) { return null; }
 
-        $streamContents = stream_get_contents($file->getFileContents(), -1, -1);
-        $file->setFileContents($streamContents);
+        $file->setFileContents(stream_get_contents($file->getFileContents(), -1, -1));
 
         return $file;
     }
     
     function findFilesBy($paginationRequest)
-    {               
+    {
         $fileCount = $this->fileRepository->findFileCount();
         $limit = $paginationRequest->getLimit($fileCount);
         
         $files = $this->fileRepository->findFilesBy($limit, $paginationRequest->getResultsPerPage());
+        
+        foreach ($files as $file)
+        {
+            $file->setFileContents(stream_get_contents($file->getFileContents(), -1, -1));
+        }
         
         return new PaginationResponse($paginationRequest->getPageCount($fileCount), $files);
     }
@@ -44,38 +48,43 @@ class FileService
     
     function transferFiles()
     {
-        $directoryPath = "../../files/";
+        $directoryPath = '../../files/';
         
         $fileCount = 0;
-        $filesTransferred = "";
+        $filesTransferred = '';
 
-        if (($directory = opendir($directoryPath)))
+        if (($directoryHandle = opendir($directoryPath)))
         {
-            while (false !== ($fileName = readdir($directory)))
+            while (false !== ($fileName = readdir($directoryHandle)))
             {
-                if (!in_array($fileName, [".", ".."]))
+                if (!in_array($fileName, ['.', '..']))
                 {
                     $fileCount++;
-                    $filesTransferred .= $fileName . "<br>";
+                    $filesTransferred .= $fileName . '<br>';
                     
                     $fileType = mime_content_type($directoryPath . $fileName);
                     $fileContent = base64_encode(file_get_contents($directoryPath . $fileName));
                     
-                    $file = new File();
-                    $file->setFileName($fileName);
-                    $file->setFileType($fileType);
-                    $file->setFileContents('data: ' . $fileType . ';base64,' . $fileContent);
-                    
-                    $this->createFile($file);
+                    $this->createFile($this->buildBase64File($fileName, $fileType, $fileContent));
                     
                     unlink($directoryPath . $fileName);
                 }
             }
         }
         
-        closedir($directory);
+        closedir($directoryHandle);
         
         return $fileCount . ' file(s) transferred <br>' . $filesTransferred;
+    }
+    
+    private function buildBase64File($fileName, $fileType, $fileContent)
+    {
+        $file = new File();
+        $file->setFileName($fileName);
+        $file->setFileType($fileType);
+        $file->setFileContents('data: ' . $fileType . ';base64,' . $fileContent);
+        
+        return $file;
     }
 
     function updateFile($file)
