@@ -4,6 +4,7 @@ namespace App\Files;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 use App\Files\File;
 
@@ -36,14 +37,14 @@ class FileRepository extends ServiceEntityRepository
     
     function findFilesBy(int $limit, int $offset)
     {
-        $conn = $this->_em->getConnection();
-
-        $sql = 'SELECT * FROM files LIMIT ' . $limit . ', ' . $offset;
-                
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-    
-        return $stmt->fetchAll();
+        $mapping = new ResultSetMapping();
+        $mapping->addEntityResult(File::class, 'file');
+        $mapping->addFieldResult('file', 'file_id', 'fileId');
+        $mapping->addFieldResult('file', 'file_name', 'fileName');
+        $mapping->addFieldResult('file', 'file_type', 'fileType');
+        $mapping->addFieldResult('file', 'file_contents', 'fileContents');
+        
+        return $this->_em->createNativeQuery('SELECT * FROM files LIMIT ' . $limit . ', ' . $offset, $mapping)->getResult();
     }
 
     function persist($file)
