@@ -22,14 +22,14 @@ class FileRepository extends ServiceEntityRepository
     }
     
     function findFileCount()
-    {        
+    {
         $conn = $this->_em->getConnection();
 
         $sql = 'SELECT COUNT(*) AS fileCount FROM files';
-                
+        
         $stmt = $conn->prepare($sql);
         $stmt->execute();
-    
+        
         $results = $stmt->fetchAll();
         $fileCount = $results[0]['fileCount'];
         return intval($fileCount);
@@ -37,6 +37,10 @@ class FileRepository extends ServiceEntityRepository
     
     function findFilesBy(int $limit, int $offset)
     {
+        $query = 'SELECT file_id, file_name, file_type, file_contents ' .
+                 'FROM files ' .
+                 'LIMIT ' . $limit . ', ' . $offset;
+        
         $mapping = new ResultSetMapping();
         $mapping->addEntityResult(File::class, 'file');
         $mapping->addFieldResult('file', 'file_id', 'fileId');
@@ -44,7 +48,7 @@ class FileRepository extends ServiceEntityRepository
         $mapping->addFieldResult('file', 'file_type', 'fileType');
         $mapping->addFieldResult('file', 'file_contents', 'fileContents');
         
-        return $this->_em->createNativeQuery('SELECT * FROM files LIMIT ' . $limit . ', ' . $offset, $mapping)->getResult();
+        return $this->_em->createNativeQuery($query, $mapping)->getResult();
     }
 
     function persist($file)
