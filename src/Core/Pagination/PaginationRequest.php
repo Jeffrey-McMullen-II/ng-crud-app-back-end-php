@@ -30,9 +30,9 @@ class PaginationRequest
         $this->resultsPerPage = $resultsPerPage;
     }
     
-    public function getLimit(int $totalRecords)
+    public function getLimit()
     {
-        return (($this->pageNumber - 1) * ($this->getPageCount($totalRecords)));
+        return $this->pageNumber * $this->resultsPerPage;
     }
     
     public function getPageCount(int $totalRecords)

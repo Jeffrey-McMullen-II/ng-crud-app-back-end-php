@@ -35,11 +35,11 @@ class FileRepository extends ServiceEntityRepository
         return intval($fileCount);
     }
     
-    function findFilesBy(int $limit, int $offset)
+    function findFilesBy(int $offset, int $rows)
     {
         $query = 'SELECT file_id, file_name, file_type, file_contents ' .
                  'FROM files ' .
-                 'LIMIT ' . $limit . ', ' . $offset;
+                 'LIMIT ' . $offset . ', ' . $rows;
         
         $mapping = new ResultSetMapping();
         $mapping->addEntityResult(File::class, 'file');

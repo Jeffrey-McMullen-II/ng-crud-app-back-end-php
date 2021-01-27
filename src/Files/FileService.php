@@ -38,7 +38,7 @@ class FileService
             $file->setFileContents(stream_get_contents($file->getFileContents(), -1, -1));
         }
         
-        return new PaginationResponse($paginationRequest->getPageCount($fileCount), $files);
+        return new PaginationResponse($fileCount, $files);
     }
 
     function createFile($file)
