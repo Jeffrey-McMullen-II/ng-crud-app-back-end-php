@@ -4,39 +4,27 @@ namespace App\Core\Pagination;
 
 class PaginationRequest
 {
-    private int $pageNumber;
+    private int $first;
     
-    private int $resultsPerPage;
+    private int $rows;
     
-    
-    
-    public function getPageNumber()
+    public function getFirst()
     {
-        return $this->pageNumber;
+        return $this->first;
     }
     
-    public function setPageNumber(int $pageNumber)
+    public function setFirst(int $first)
     {
-        $this->pageNumber = $pageNumber;
+        $this->first = $first;
     }
     
-    public function getResultsPerPage()
+    public function getRows()
     {
-        return $this->resultsPerPage;
+        return $this->rows;
     }
     
-    public function setResultsPerPage(int $resultsPerPage)
+    public function setRows(int $rows)
     {
-        $this->resultsPerPage = $resultsPerPage;
-    }
-    
-    public function getLimit()
-    {
-        return $this->pageNumber * $this->resultsPerPage;
-    }
-    
-    public function getPageCount(int $totalRecords)
-    {
-        return $totalRecords / $this->resultsPerPage;
+        $this->rows = $rows;
     }
 }

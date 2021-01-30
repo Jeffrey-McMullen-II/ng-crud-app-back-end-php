@@ -29,9 +29,8 @@ class FileService
     function findFilesBy($paginationRequest)
     {
         $fileCount = $this->fileRepository->findFileCount();
-        $limit = $paginationRequest->getLimit($fileCount);
         
-        $files = $this->fileRepository->findFilesBy($limit, $paginationRequest->getResultsPerPage());
+        $files = $this->fileRepository->findFilesBy($paginationRequest->getFirst(), $paginationRequest->getRows());
         
         foreach ($files as $file)
         {
