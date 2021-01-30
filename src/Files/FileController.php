@@ -38,7 +38,7 @@ class FileController extends BaseController
     }
     
     /**
-     * @Route("/by-pagination-request")
+     * @Route("/page-request")
      * @Method("POST")
      */
     function findFilesBy(Request $request)
