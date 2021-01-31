@@ -3,7 +3,7 @@
 namespace App\Core\Logs;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 use App\Core\Logs\Log;
 

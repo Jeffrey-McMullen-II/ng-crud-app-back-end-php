@@ -1,10 +1,10 @@
 doctrine:
     dbal:
-        url: 'mysql://root:@127.0.0.1:3306/crud_database?serverVersion=10.4.11'
+        url: 'mysql://root:@127.0.0.1:3306/crud?serverVersion=10.4.11'
 
         ### DATABASES ###
-            #mysql://jaygame2_guest:guest@127.0.0.1:3306/jaygame2_dtccjaygames?serverVersion=10.0.38
-            #mysql://root:@127.0.0.1:3306/crud_database?serverVersion=10.4.11
+            #mysql://jaygame2_guest:guest@127.0.0.1:3306/jaygame2_crud?serverVersion=10.0.38
+            #mysql://root:@127.0.0.1:3306/crud?serverVersion=10.4.11
         ### DATABASES ###
     orm:
         auto_generate_proxy_classes: true
