@@ -13,7 +13,7 @@ use App\Files\FileService;
 use App\Core\Pagination\PaginationRequest;
 
 /**
- * @Route("/api/files")
+ * @Route("/files")
  */
 class FileController extends BaseController
 {

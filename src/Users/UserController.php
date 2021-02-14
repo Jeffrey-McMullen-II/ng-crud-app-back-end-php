@@ -13,7 +13,7 @@ use App\Users\User;
 use App\Users\UserService;
 
 /**
- * @Route("/api/users")
+ * @Route("/users")
  */
 class UserController extends BaseController
 {
