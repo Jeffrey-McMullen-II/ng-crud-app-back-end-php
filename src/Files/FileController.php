@@ -25,16 +25,21 @@ class FileController extends BaseController
         
         $this->fileService = $fileService;
     }
-
+    
     /**
-     * @Route("/{fileId}")
+     * @Route()
      * @Method("GET")
      */
-    function findFileByFileId($fileId)
+    function findFile(Request $request)
     {
-        $file = $this->fileService->findFileByFileId($fileId);
-
-        return $file !== null ? new Response($this->toJson($file)) : new Response(null);
+        $response = $this->fileService->findFile(
+                $request->query->get('fileName'),
+                $request->query->get('width'),
+                $request->query->get('height'),
+                $request->query->get('link')
+        );
+        
+        return new Response($response);
     }
     
     /**

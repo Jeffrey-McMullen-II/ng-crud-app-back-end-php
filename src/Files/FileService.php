@@ -26,6 +26,30 @@ class FileService
         return $file;
     }
     
+    function findFile($fileName, $width, $height, $link)
+    {
+        $fileContents = $this->fileRepository->findFileByName($fileName);
+
+        if ($fileContents === null) { return '404 Not Found'; }
+        
+        $image = '<img ' .
+                    'src="' . $fileContents . ' "' .
+                    'width="' . ($width !== null ? $width : '200') . '" ' .
+                    'height="' . ($height !== null ? $height : '200') . '" ' .
+                    'style="' . ($link !== null ? 'cursor: pointer;' : '') . '" ' .
+                    'title="' . ($link !== null ? $fileName . "\n\nNavigate - " . $link : $fileName) . '" ' .
+                    'onclick="' . ($link !== null ? 'openLink()' : '') . '"' .
+                 '/>';
+        
+        $script = "<script type=\"text/javascript\">
+                    function openLink(image) {window.top.location.href = '$link';}
+                   </script>";
+        
+        return '<body style="padding:0; margin:0;">' .
+                    ($link !== null ? $script . $image : $image) .
+               '</body>';
+    }
+    
     function findFilesBy($paginationRequest)
     {
         $fileCount = $this->fileRepository->findFileCount();
@@ -81,7 +105,7 @@ class FileService
         $file = new File();
         $file->setFileName($fileName);
         $file->setFileType($fileType);
-        $file->setFileContents('data: ' . $fileType . ';base64,' . $fileContent);
+        $file->setFileContents('data:' . $fileType . ';base64,' . $fileContent);
         
         return $file;
     }

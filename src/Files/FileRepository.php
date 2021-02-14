@@ -35,6 +35,25 @@ class FileRepository extends ServiceEntityRepository
         return intval($fileCount);
     }
     
+    function findFileByName($fileName)
+    {
+        $conn = $this->_em->getConnection();
+
+        $sql = 'SELECT file_name, file_contents AS fileContents FROM files WHERE file_name = :fileName';
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['fileName' => $fileName]);
+        
+        $results = $stmt->fetchAll();
+        
+        if ($results !== null && count($results) > 0)
+        {
+            return $results[0]['fileContents'];
+        }
+        
+        return null;
+    }
+    
     function findFilesBy(int $offset, int $rows)
     {
         $query = 'SELECT file_id, file_name, file_type, file_contents ' .
