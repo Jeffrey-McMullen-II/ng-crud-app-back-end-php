@@ -26,7 +26,7 @@ class FileService
         return $file;
     }
     
-    function findFile($fileName, $width, $height, $link)
+    function findFile($fileName, $width, $height, $title)
     {
         $fileContents = $this->fileRepository->findFileByName($fileName);
 
@@ -36,18 +36,10 @@ class FileService
                     'src="' . $fileContents . ' "' .
                     'width="' . ($width !== null ? $width : '200') . '" ' .
                     'height="' . ($height !== null ? $height : '200') . '" ' .
-                    'style="' . ($link !== null ? 'cursor: pointer;' : '') . '" ' .
-                    'title="' . ($link !== null ? $fileName . "\n\nNavigate - " . $link : $fileName) . '" ' .
-                    'onclick="' . ($link !== null ? 'openLink()' : '') . '"' .
+                    'title="' . $title . '" ' .
                  '/>';
         
-        $script = "<script type=\"text/javascript\">
-                    function openLink(image) {window.top.location.href = '$link';}
-                   </script>";
-        
-        return '<body style="padding:0; margin:0;">' .
-                    ($link !== null ? $script . $image : $image) .
-               '</body>';
+        return '<body style="padding:0; margin:0;">' . $image . '</body>';
     }
     
     function findFilesBy($paginationRequest)

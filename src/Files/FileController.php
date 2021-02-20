@@ -36,7 +36,7 @@ class FileController extends BaseController
                 $request->query->get('fileName'),
                 $request->query->get('width'),
                 $request->query->get('height'),
-                $request->query->get('link')
+                $request->query->get('title')
         );
         
         return new Response($response);
