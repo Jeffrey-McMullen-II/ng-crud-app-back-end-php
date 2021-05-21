@@ -5,6 +5,7 @@ namespace App\Files;
 use App\Files\File;
 use App\Files\FileRepository;
 use App\Core\Pagination\PaginationResponse;
+use App\Core\Pagination\PaginationRequest;
 
 class FileService
 {
@@ -15,7 +16,7 @@ class FileService
         $this->fileRepository = $fileRepository;
     }
 
-    function findFileByFileId($fileId)
+    function findFileByFileId(int $fileId): File
     {
         $file = $this->fileRepository->find($fileId);
 
@@ -26,7 +27,7 @@ class FileService
         return $file;
     }
     
-    function findFile($fileName, $width, $height, $title)
+    function findFile(string $fileName, string $width, string $height, string $title): string
     {
         $fileContents = $this->fileRepository->findFileByName($fileName);
 
@@ -42,7 +43,7 @@ class FileService
         return '<body style="padding:0; margin:0;">' . $image . '</body>';
     }
     
-    function findFilesBy($paginationRequest)
+    function findFilesBy(PaginationRequest $paginationRequest): PaginationResponse
     {
         $fileCount = $this->fileRepository->findFileCount();
         
@@ -56,12 +57,12 @@ class FileService
         return new PaginationResponse($fileCount, $files);
     }
 
-    function createFile($file)
+    function createFile(File $file)
     {
         $this->fileRepository->persist($file);
     }
     
-    function transferFiles()
+    function transferFiles(): string
     {
         $directoryPath = '../../files/';
         
@@ -92,7 +93,7 @@ class FileService
         return $fileCount . ' file(s) transferred <br>' . $filesTransferred;
     }
     
-    private function buildBase64File($fileName, $fileType, $fileContent)
+    private function buildBase64File(string $fileName, string $fileType, $fileContent): File
     {
         $file = new File();
         $file->setFileName($fileName);
@@ -102,12 +103,12 @@ class FileService
         return $file;
     }
 
-    function updateFile($file)
+    function updateFile(File $file)
     {
         $this->fileRepository->merge($file);
     }
 
-    function deleteFileByFileId($fileId)
+    function deleteFileByFileId(int $fileId): File
     {
         $file = $this->findFileByFileId($fileId);
         

@@ -21,7 +21,7 @@ class FileRepository extends ServiceEntityRepository
         parent::__construct($registry, File::class);
     }
     
-    function findFileCount()
+    function findFileCount(): int
     {
         $conn = $this->_em->getConnection();
 
@@ -35,7 +35,7 @@ class FileRepository extends ServiceEntityRepository
         return intval($fileCount);
     }
     
-    function findFileByName($fileName)
+    function findFileByName($fileName): File
     {
         $conn = $this->_em->getConnection();
 
@@ -54,7 +54,7 @@ class FileRepository extends ServiceEntityRepository
         return null;
     }
     
-    function findFilesBy(int $offset, int $rows)
+    function findFilesBy(int $offset, int $rows): array
     {
         $query = 'SELECT file_id, file_name, file_type, file_contents ' .
                  'FROM files ' .

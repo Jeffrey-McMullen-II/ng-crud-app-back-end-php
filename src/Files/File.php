@@ -15,17 +15,17 @@ class File
      * @ORM\GeneratedValue()
      * @ORM\Column(name="file_id", type="integer")
      */
-    private $fileId;
+    private ?int $fileId;
     
     /**
      * @ORM\Column(name="file_name", type="text")
      */
-    private $fileName;
+    private string $fileName;
 
     /**
      * @ORM\Column(name="file_type", type="text")
      */
-    private $fileType;
+    private string $fileType;
 
     /**
      * @ORM\Column(name="file_contents", type="blob")
@@ -34,32 +34,32 @@ class File
 
 
 
-    public function getFileId()
+    public function getFileId(): ?int
     {
         return $this->fileId;
     }
 
-    public function setFileId($fileId)
+    public function setFileId(int $fileId)
     {
         $this->fileId = $fileId;
     }
     
-    public function getFileName()
+    public function getFileName(): string
     {
         return $this->fileName;
     }
 
-    public function setFileName($fileName)
+    public function setFileName(string $fileName)
     {
         $this->fileName = $fileName;
     }
 
-    public function getFileType()
+    public function getFileType(): string
     {
         return $this->fileType;
     }
 
-    public function setFileType($fileType)
+    public function setFileType(string $fileType)
     {
         $this->fileType = $fileType;
     }
