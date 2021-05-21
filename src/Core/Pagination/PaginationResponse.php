@@ -8,18 +8,18 @@ class PaginationResponse
     
     private array $results;
     
-    public function __construct($totalRecords, $results)
+    public function __construct(int $totalRecords, array $results)
     {
         $this->totalRecords = $totalRecords;
         $this->results = $results;
     }
     
-    public function getTotalRecords()
+    public function getTotalRecords(): int
     {
         return $this->totalRecords;
     }
     
-    public function getResults()
+    public function getResults(): array
     {
         return $this->results;
     }

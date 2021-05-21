@@ -8,7 +8,7 @@ class PaginationRequest
     
     private int $rows;
     
-    public function getFirst()
+    public function getFirst(): int
     {
         return $this->first;
     }
@@ -18,7 +18,7 @@ class PaginationRequest
         $this->first = $first;
     }
     
-    public function getRows()
+    public function getRows(): int
     {
         return $this->rows;
     }
