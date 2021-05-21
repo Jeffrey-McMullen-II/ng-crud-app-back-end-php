@@ -29,7 +29,7 @@ class FileService
     
     function findFile(string $fileName, string $width, string $height, string $title): string
     {
-        $fileContents = $this->fileRepository->findFileByName($fileName);
+        $fileContents = $this->fileRepository->findFileContentsForFileByName($fileName);
 
         if ($fileContents === null) { return '404 Not Found'; }
         

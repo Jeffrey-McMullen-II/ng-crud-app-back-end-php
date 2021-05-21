@@ -35,7 +35,7 @@ class FileRepository extends ServiceEntityRepository
         return intval($fileCount);
     }
     
-    function findFileByName($fileName): File
+    function findFileContentsForFileByName(string $fileName)
     {
         $conn = $this->_em->getConnection();
 
