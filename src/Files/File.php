@@ -31,9 +31,24 @@ class File
      * @ORM\Column(name="file_contents", type="blob")
      */
     private $fileContents;
+    
+    
+    
+    public static function base64EncodedOf(string $fileName, string $filePath): File
+    {
+        $fileType = mime_content_type($filePath);
+        $fileContents = file_get_contents($filePath);
+        
+        $file = new File();
+        $file->setFileName($fileName);
+        $file->setFileType($fileType);
+        $file->setFileContents('data:' . $fileType . ';base64,' . base64_encode($fileContents));
+        
+        return $file;
+    }
+    
 
-
-
+    
     public function getFileId(): ?int
     {
         return $this->fileId;

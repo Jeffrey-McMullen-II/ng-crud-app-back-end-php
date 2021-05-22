@@ -64,43 +64,35 @@ class FileService
     
     function transferFiles(): string
     {
-        $directoryPath = '../../files/';
-        
         $fileCount = 0;
         $filesTransferred = '';
-
-        if (($directoryHandle = opendir($directoryPath)))
+        
+        $directoryPath = '../../files/';
+        $directoryHandle = opendir($directoryPath);
+        
+        while ($directoryHandle)
         {
-            while (false !== ($fileName = readdir($directoryHandle)))
+            $fileName = readdir($directoryHandle);
+            
+            if (!$fileName)
             {
-                if (!in_array($fileName, ['.', '..']))
-                {
-                    $fileCount++;
-                    $filesTransferred .= $fileName . '<br>';
-                    
-                    $fileType = mime_content_type($directoryPath . $fileName);
-                    $fileContent = base64_encode(file_get_contents($directoryPath . $fileName));
-                    
-                    $this->createFile($this->buildBase64File($fileName, $fileType, $fileContent));
-                    
-                    unlink($directoryPath . $fileName);
-                }
+                closedir($directoryHandle);
+                break;
             }
+            
+            if (in_array($fileName, ['.', '..'])) { continue; }
+            
+            $fileCount++;
+            $filesTransferred .= $fileName . '<br>';
+
+            $filePath = $directoryPath . $fileName;
+            
+            $this->createFile(File::base64EncodedOf($fileName, $filePath));
+
+            unlink($filePath);
         }
         
-        closedir($directoryHandle);
-        
         return $fileCount . ' file(s) transferred <br>' . $filesTransferred;
-    }
-    
-    private function buildBase64File(string $fileName, string $fileType, $fileContent): File
-    {
-        $file = new File();
-        $file->setFileName($fileName);
-        $file->setFileType($fileType);
-        $file->setFileContents('data:' . $fileType . ';base64,' . $fileContent);
-        
-        return $file;
     }
 
     function updateFile(File $file)
