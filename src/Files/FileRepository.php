@@ -46,12 +46,7 @@ class FileRepository extends ServiceEntityRepository
         
         $results = $stmt->fetchAll();
         
-        if ($results !== null && count($results) > 0)
-        {
-            return $results[0]['fileContents'];
-        }
-        
-        return null;
+        return ($results !== null && count($results) > 0) ? $results[0]['fileContents'] : null;
     }
     
     function findFilesBy(int $offset, int $rows): array
