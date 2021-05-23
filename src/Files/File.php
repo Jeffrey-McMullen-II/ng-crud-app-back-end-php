@@ -54,7 +54,7 @@ class File
         return $this->fileId;
     }
 
-    public function setFileId(int $fileId)
+    public function setFileId(?int $fileId)
     {
         $this->fileId = $fileId;
     }
@@ -79,12 +79,17 @@ class File
         $this->fileType = $fileType;
     }
 
-    public function getFileContents()
+    public function getFileContents(): string
     {
+        if ("resource" === gettype($this->fileContents))
+        {
+            return stream_get_contents($this->fileContents, -1, -1);
+        }
+        
         return $this->fileContents;
     }
 
-    public function setFileContents($fileContents)
+    public function setFileContents(string $fileContents)
     {
         $this->fileContents = $fileContents;
     }

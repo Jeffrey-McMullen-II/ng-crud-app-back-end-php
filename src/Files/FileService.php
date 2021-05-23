@@ -18,13 +18,7 @@ class FileService
 
     function findFileByFileId(int $fileId): File
     {
-        $file = $this->fileRepository->find($fileId);
-
-        if ($file === null) { return null; }
-
-        $file->setFileContents(stream_get_contents($file->getFileContents(), -1, -1));
-
-        return $file;
+        return $this->fileRepository->find($fileId);
     }
     
     function findFile(string $fileName, string $width, string $height, string $title): string
@@ -48,11 +42,6 @@ class FileService
         $fileCount = $this->fileRepository->findFileCount();
         
         $files = $this->fileRepository->findFilesBy($paginationRequest->getFirst(), $paginationRequest->getRows());
-        
-        foreach ($files as $file)
-        {
-            $file->setFileContents(stream_get_contents($file->getFileContents(), -1, -1));
-        }
         
         return new PaginationResponse($fileCount, $files);
     }
@@ -99,9 +88,11 @@ class FileService
     {
         $file = $this->findFileByFileId($fileId);
         
-        if ($file === null) { return null; }
+        if ($file !== null)
+        {
+            $this->fileRepository->remove($file);
+        }
         
-        $this->fileRepository->remove($file);
         return $file;
     }
 }
