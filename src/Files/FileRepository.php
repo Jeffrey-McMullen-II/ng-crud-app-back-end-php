@@ -6,6 +6,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query\ResultSetMapping;
 
+use App\Core\Pagination\PaginationResponse;
+use App\Core\Pagination\PaginationRequest;
 use App\Files\File;
 
 /**
@@ -21,27 +23,13 @@ class FileRepository extends ServiceEntityRepository
         parent::__construct($registry, File::class);
     }
     
-    function findFileCount(): int
-    {
-        $conn = $this->_em->getConnection();
-
-        $sql = "SELECT COUNT(*) AS fileCount FROM files";
-        
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        
-        $results = $stmt->fetchAll();
-        $fileCount = $results[0]["fileCount"];
-        return intval($fileCount);
-    }
-    
     function findFileContentsForFileByName(string $fileName)
     {
         $conn = $this->_em->getConnection();
 
-        $sql = "SELECT file_name, file_contents AS fileContents FROM files WHERE file_name = :fileName";
+        $query = "SELECT file_name, file_contents AS fileContents FROM files WHERE file_name = :fileName";
         
-        $stmt = $conn->prepare($sql);
+        $stmt = $conn->prepare($query);
         $stmt->execute(["fileName" => $fileName]);
         
         $results = $stmt->fetchAll();
@@ -49,11 +37,11 @@ class FileRepository extends ServiceEntityRepository
         return ($results !== null && count($results) > 0) ? $results[0]["fileContents"] : null;
     }
     
-    function findFilesBy(int $offset, int $rows): array
+    function findFilesBy(PaginationRequest $paginationRequest): PaginationResponse
     {
         $query = "SELECT file_id, file_name, file_type, file_contents " .
                  "FROM files " .
-                 "LIMIT " . $offset . ", " . $rows;
+                 "LIMIT " . $paginationRequest->getFirst() . ", " . $paginationRequest->getRows();
         
         $mapping = new ResultSetMapping();
         $mapping->addEntityResult(File::class, "file");
@@ -62,7 +50,23 @@ class FileRepository extends ServiceEntityRepository
         $mapping->addFieldResult("file", "file_type", "fileType");
         $mapping->addFieldResult("file", "file_contents", "fileContents");
         
-        return $this->_em->createNativeQuery($query, $mapping)->getResult();
+        $files = $this->_em->createNativeQuery($query, $mapping)->getResult();
+        
+        return new PaginationResponse($this->findFileCount(), $files);
+    }
+    
+    private function findFileCount(): int
+    {
+        $conn = $this->_em->getConnection();
+
+        $query = "SELECT COUNT(*) AS fileCount FROM files";
+        
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        
+        $results = $stmt->fetchAll();
+        $fileCount = $results[0]["fileCount"];
+        return intval($fileCount);
     }
 
     function persist(File $file)
