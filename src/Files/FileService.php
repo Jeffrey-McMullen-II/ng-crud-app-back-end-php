@@ -2,10 +2,10 @@
 
 namespace App\Files;
 
-use App\Files\File;
-use App\Files\FileRepository;
 use App\Core\Pagination\PaginationResponse;
 use App\Core\Pagination\PaginationRequest;
+use App\Files\File;
+use App\Files\FileRepository;
 
 class FileService
 {
@@ -38,12 +38,8 @@ class FileService
     }
     
     function findFilesBy(PaginationRequest $paginationRequest): PaginationResponse
-    {
-        $fileCount = $this->fileRepository->findFileCount();
-        
-        $files = $this->fileRepository->findFilesBy($paginationRequest->getFirst(), $paginationRequest->getRows());
-        
-        return new PaginationResponse($fileCount, $files);
+    {        
+        return $this->fileRepository->findFilesBy($paginationRequest);
     }
 
     function createFile(File $file)
