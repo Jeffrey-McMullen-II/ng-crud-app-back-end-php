@@ -15,13 +15,13 @@ class JsonMapper
         $this->serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
     }
 
-    function toObject($jsonContents, $className)
+    function toObject(string $jsonContents, string $className): object
     {
         return $this->serializer->deserialize($jsonContents, $className, 'json');
     }
 
-    function toJson($object)
+    function toJson($content): string
     {
-        return $this->serializer->serialize($object, 'json');
+        return $this->serializer->serialize($content, 'json');
     }
 }
