@@ -2,8 +2,8 @@
 
 namespace App\Files;
 
-use App\Core\Pagination\PaginationResponse;
 use App\Core\Pagination\PaginationRequest;
+use App\Core\Pagination\PaginationResponse;
 use App\Files\File;
 use App\Files\FileRepository;
 
