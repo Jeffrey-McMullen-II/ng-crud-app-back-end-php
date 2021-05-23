@@ -27,7 +27,7 @@ class FileRepository extends ServiceEntityRepository
     {
         $conn = $this->_em->getConnection();
 
-        $query = "SELECT file_name, file_contents AS fileContents FROM files WHERE file_name = :fileName";
+        $query = "SELECT file_contents AS fileContents FROM files WHERE file_name = :fileName";
         
         $stmt = $conn->prepare($query);
         $stmt->execute(["fileName" => $fileName]);
