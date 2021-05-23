@@ -9,8 +9,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use App\Core\Controllers\BaseController;
 use App\Core\Mappers\JsonMapper;
-use App\Files\FileService;
 use App\Core\Pagination\PaginationRequest;
+use App\Files\FileService;
 
 /**
  * @Route("/files")
