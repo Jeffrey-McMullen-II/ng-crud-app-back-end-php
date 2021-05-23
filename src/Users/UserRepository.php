@@ -49,7 +49,8 @@ class UserRepository extends ServiceEntityRepository
         $mapping->addFieldResult('u', 'user_last_name', 'userLastName');
         $mapping->addFieldResult('u', 'user_email', 'userEmail');
         
-        $query = $this->_em->createNativeQuery(
+        $query = $this->_em->createNativeQuery
+        (
             'SELECT * FROM users ' . 
             'WHERE user_first_name = :userFirstName ' .
             'ORDER BY user_id ASC', $mapping
@@ -62,7 +63,8 @@ class UserRepository extends ServiceEntityRepository
 
     function findAllByFirstNameDQL(string $userFirstName): array
     {
-        $query = $this->_em->createQuery(
+        $query = $this->_em->createQuery
+        (
             'SELECT u FROM ' . User::class . ' u ' .
             'WHERE u.userFirstName = :userFirstName ' .
             'ORDER BY u.user_id DESC'
@@ -111,7 +113,8 @@ class UserRepository extends ServiceEntityRepository
         $mapping->addFieldResult('u', 'user_last_name', 'userLastName');
         $mapping->addFieldResult('u', 'user_email', 'userEmail');
         
-        $query = $this->_em->createNativeQuery(
+        $query = $this->_em->createNativeQuery
+        (
             'SELECT * FROM users 
              ORDER BY user_id ASC
              LIMIT 1', $mapping

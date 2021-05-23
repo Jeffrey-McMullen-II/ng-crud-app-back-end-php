@@ -32,7 +32,8 @@ class FileController extends BaseController
      */
     function findFile(Request $request)
     {
-        $response = $this->fileService->findFile(
+        $response = $this->fileService->findFile
+        (
                 $request->query->get('fileName'),
                 $request->query->get('width'),
                 $request->query->get('height'),
