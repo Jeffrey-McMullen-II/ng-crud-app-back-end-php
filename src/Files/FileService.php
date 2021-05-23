@@ -25,7 +25,7 @@ class FileService
     {
         $fileContents = $this->fileRepository->findFileContentsForFileByName($fileName);
 
-        if ($fileContents === null) { return '404 Not Found'; }
+        if ($fileContents === null) { return "404 Not Found"; }
         
         $image = '<img ' .
                     'src="' . $fileContents . ' "' .
@@ -54,9 +54,9 @@ class FileService
     function transferFiles(): string
     {
         $fileCount = 0;
-        $filesTransferred = '';
+        $filesTransferred = "";
         
-        $directoryPath = '../../files/';
+        $directoryPath = "../../files/";
         $directoryHandle = opendir($directoryPath);
         
         while ($directoryHandle)
@@ -64,10 +64,10 @@ class FileService
             $fileName = readdir($directoryHandle);
             
             if (!$fileName) { closedir($directoryHandle); break; }
-            if (in_array($fileName, ['.', '..'])) { continue; }
+            if (in_array($fileName, [".", ".."])) { continue; }
             
             $fileCount++;
-            $filesTransferred .= $fileName . '<br>';
+            $filesTransferred .= $fileName . "<br>";
 
             $filePath = $directoryPath . $fileName;
             
@@ -76,7 +76,7 @@ class FileService
             unlink($filePath);
         }
         
-        return $fileCount . ' file(s) transferred <br>' . $filesTransferred;
+        return $fileCount . " file(s) transferred <br>" . $filesTransferred;
     }
 
     function updateFile(File $file)
