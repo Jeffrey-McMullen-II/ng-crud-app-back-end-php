@@ -21,7 +21,7 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    function findUserByUserId(int $userId): User
+    function findUserBy(int $userId): User
     {
         $query = $this->_em->createQuery("SELECT u FROM " . User::class . " u " . "WHERE u.user_id = :userId");
         $query->setParameter("userId", $userId); 

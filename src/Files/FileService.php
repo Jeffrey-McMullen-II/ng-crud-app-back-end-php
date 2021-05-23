@@ -16,14 +16,14 @@ class FileService
         $this->fileRepository = $fileRepository;
     }
 
-    function findFileByFileId(int $fileId): File
+    function findFileBy(int $fileId): File
     {
         return $this->fileRepository->find($fileId);
     }
     
     function findFile(string $fileName, string $width, string $height, string $title): string
     {
-        $fileContents = $this->fileRepository->findFileContentsForFileByName($fileName);
+        $fileContents = $this->fileRepository->findFileContentsForFileBy($fileName);
 
         if ($fileContents === null) { return "404 Not Found"; }
         
@@ -80,9 +80,9 @@ class FileService
         $this->fileRepository->merge($file);
     }
 
-    function deleteFileByFileId(int $fileId): File
+    function deleteFileBy(int $fileId): File
     {
-        $file = $this->findFileByFileId($fileId);
+        $file = $this->findFileBy($fileId);
         
         if ($file !== null)
         {

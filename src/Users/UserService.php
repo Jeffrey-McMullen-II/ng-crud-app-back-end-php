@@ -17,9 +17,9 @@ class UserService
         $this->logService = $logService;
     }
 
-    function findUserById(int $userId): User
+    function findUserBy(int $userId): User
     {
-        return $this->userRepository->findUserByUserId($userId);
+        return $this->userRepository->findUserBy($userId);
     }
 
     function getCountOfUsers(): int
@@ -50,12 +50,16 @@ class UserService
         $this->userRepository->merge($user);
     }
 
-    function deleteUserByUserId(int $userId): User
-    {
-        $this->logService->logInfo("Deleting user with id: " . $userId);
+    function deleteUserBy(int $userId): User
+    {        
+        $user = $this->findUserBy($userId);
         
-        $user = $this->findUserByUserId($userId);
-        $this->userRepository->remove($user);
+        if ($user !== null)
+        {
+            $this->logService->logInfo("Deleting user with id: " . $userId);
+            $this->userRepository->remove($user);
+        }
+        
         return $user;
     }
 }

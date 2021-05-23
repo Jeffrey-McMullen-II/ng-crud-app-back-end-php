@@ -95,9 +95,9 @@ class FileController extends BaseController
      * @Route("/{fileId}")
      * @Method("DELETE")
      */
-    function deleteFileByFileId(int $fileId)
+    function deleteFileBy(int $fileId)
     {
-        $file = $this->fileService->deleteFileByFileId($fileId);
+        $file = $this->fileService->deleteFileBy($fileId);
 
         return new Response($file);
     }
