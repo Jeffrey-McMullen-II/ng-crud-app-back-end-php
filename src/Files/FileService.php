@@ -74,12 +74,7 @@ class FileService
         {
             $fileName = readdir($directoryHandle);
             
-            if (!$fileName)
-            {
-                closedir($directoryHandle);
-                break;
-            }
-            
+            if (!$fileName) { closedir($directoryHandle); break; }
             if (in_array($fileName, ['.', '..'])) { continue; }
             
             $fileCount++;
