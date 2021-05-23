@@ -65,19 +65,19 @@ class FileRepository extends ServiceEntityRepository
         return $this->_em->createNativeQuery($query, $mapping)->getResult();
     }
 
-    function persist($file)
+    function persist(File $file)
     {
         $this->_em->persist($file);
         $this->_em->flush();
     }
 
-    function merge($file)
+    function merge(File $file)
     {
         $this->_em->merge($file);
         $this->_em->flush();
     }
 
-    function remove($file)
+    function remove(File $file)
     {
         $this->_em->remove($file);
         $this->_em->flush();
