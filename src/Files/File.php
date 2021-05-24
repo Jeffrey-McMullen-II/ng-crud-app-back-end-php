@@ -49,7 +49,7 @@ class File
     
 
     
-    public function getFileId(): int
+    public function getFileId(): ?int
     {
         return $this->fileId;
     }
