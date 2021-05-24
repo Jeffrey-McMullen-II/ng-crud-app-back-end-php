@@ -21,7 +21,7 @@ class FileService
         return $this->fileRepository->find($fileId);
     }
     
-    function findFile(string $fileName, string $width, string $height, string $title): string
+    function findFile(string $fileName, ?string $width, ?string $height, ?string $title): string
     {
         $fileContents = $this->fileRepository->findFileContentsForFileBy($fileName);
 
