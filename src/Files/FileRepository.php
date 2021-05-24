@@ -23,7 +23,7 @@ class FileRepository extends ServiceEntityRepository
         parent::__construct($registry, File::class);
     }
     
-    function findFileContentsForFileBy(string $fileName)
+    function findFileContentsForFileBy(string $fileName): ?string
     {
         $conn = $this->_em->getConnection();
 

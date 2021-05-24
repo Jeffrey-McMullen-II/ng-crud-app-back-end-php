@@ -16,7 +16,7 @@ class FileService
         $this->fileRepository = $fileRepository;
     }
 
-    function findFileBy(int $fileId): File
+    function findFileBy(int $fileId): ?File
     {
         return $this->fileRepository->find($fileId);
     }
@@ -80,7 +80,7 @@ class FileService
         $this->fileRepository->merge($file);
     }
 
-    function deleteFileBy(int $fileId): File
+    function deleteFileBy(int $fileId): ?File
     {
         $file = $this->findFileBy($fileId);
         
