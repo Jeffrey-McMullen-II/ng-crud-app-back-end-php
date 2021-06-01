@@ -37,9 +37,9 @@ class FileService
         return '<body style="padding:0; margin:0;">' . $image . '</body>';
     }
     
-    function findFilesBy(PaginationRequest $paginationRequest): PaginationResponse
+    function findImageFilesBy(PaginationRequest $paginationRequest): PaginationResponse
     {        
-        return $this->fileRepository->findFilesBy($paginationRequest);
+        return $this->fileRepository->findImageFilesBy($paginationRequest);
     }
 
     function createFile(File $file)

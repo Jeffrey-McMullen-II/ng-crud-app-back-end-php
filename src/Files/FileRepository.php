@@ -27,7 +27,10 @@ class FileRepository extends ServiceEntityRepository
     {
         $conn = $this->_em->getConnection();
 
-        $query = "SELECT file_contents AS fileContents FROM files WHERE file_name = :fileName";
+        $query = "SELECT file_contents AS fileContents " .
+                 "FROM files " .
+                 "WHERE file_name = :fileName " .
+                 "AND file_type IN(SELECT image_type FROM util_image_types)";
         
         $stmt = $conn->prepare($query);
         $stmt->execute(["fileName" => $fileName]);
@@ -37,10 +40,11 @@ class FileRepository extends ServiceEntityRepository
         return ($results !== null && count($results) > 0) ? $results[0]["fileContents"] : null;
     }
     
-    function findFilesBy(PaginationRequest $paginationRequest): PaginationResponse
+    function findImageFilesBy(PaginationRequest $paginationRequest): PaginationResponse
     {
         $query = "SELECT file_id, file_name, file_type, file_contents " .
                  "FROM files " .
+                 "WHERE file_type IN(SELECT image_type FROM util_image_types) " .
                  "LIMIT " . $paginationRequest->getFirst() . ", " . $paginationRequest->getRows();
         
         $mapping = new ResultSetMapping();
@@ -52,14 +56,14 @@ class FileRepository extends ServiceEntityRepository
         
         $files = $this->_em->createNativeQuery($query, $mapping)->getResult();
         
-        return new PaginationResponse($this->findFileCount(), $files);
+        return new PaginationResponse($this->findImageFileCount(), $files);
     }
     
-    private function findFileCount(): int
+    private function findImageFileCount(): int
     {
         $conn = $this->_em->getConnection();
 
-        $query = "SELECT COUNT(*) AS fileCount FROM files";
+        $query = "SELECT COUNT(*) AS fileCount FROM files WHERE file_type IN(SELECT image_type FROM util_image_types)";
         
         $stmt = $conn->prepare($query);
         $stmt->execute();

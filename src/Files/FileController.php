@@ -30,7 +30,7 @@ class FileController extends BaseController
      * @Route("/images")
      * @Method("GET")
      */
-    function findFile(Request $request)
+    function findImageFile(Request $request)
     {
         $response = $this->fileService->findImageFile
         (
@@ -44,14 +44,14 @@ class FileController extends BaseController
     }
     
     /**
-     * @Route("/page-request")
+     * @Route("/images/pages")
      * @Method("POST")
      */
-    function findFilesBy(Request $request)
+    function findImageFilesBy(Request $request)
     {
         $paginationRequest = $this->toObject($request->getContent(), PaginationRequest::class);
         
-        $paginationResponse = $this->fileService->findFilesBy($paginationRequest);
+        $paginationResponse = $this->fileService->findImageFilesBy($paginationRequest);
         
         return new Response($this->toJson($paginationResponse));
     }
