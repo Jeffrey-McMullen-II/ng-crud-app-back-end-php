@@ -27,12 +27,12 @@ class FileController extends BaseController
     }
     
     /**
-     * @Route()
+     * @Route("/images")
      * @Method("GET")
      */
     function findFile(Request $request)
     {
-        $response = $this->fileService->findFile
+        $response = $this->fileService->findImageFile
         (
                 $request->query->get('fileName'),
                 $request->query->get('width'),
