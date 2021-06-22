@@ -20,7 +20,7 @@ class JsonMapper
         return $this->serializer->deserialize($jsonContents, $className, 'json');
     }
 
-    function toJson($content): string
+    function toJson(/*any*/ $content): string
     {
         return $this->serializer->serialize($content, 'json');
     }
