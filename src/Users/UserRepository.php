@@ -33,59 +33,59 @@ class UserRepository extends ServiceEntityRepository
         $mapping = new ResultSetMapping();
         $mapping->addEntityResult(User::class, "u");
         $mapping->addFieldResult("u", "user_id", "userId");
-        $mapping->addFieldResult("u", "user_first_name", "userFirstName");
-        $mapping->addFieldResult("u", "user_last_name", "userLastName");
-        $mapping->addFieldResult("u", "user_email", "userEmail");
+        $mapping->addFieldResult("u", "first_name", "firstName");
+        $mapping->addFieldResult("u", "last_name", "lastName");
+        $mapping->addFieldResult("u", "email", "email");
         
         return $this->_em->createNativeQuery("SELECT * FROM users ORDER BY user_id ASC LIMIT 100", $mapping)->getResult();
     }
 
-    function findAllByFirstNameNativeQuery(string $userFirstName): array
+    function findAllByFirstNameNativeQuery(string $firstName): array
     {
         $mapping = new ResultSetMapping();
         $mapping->addEntityResult(User::class, "u");
         $mapping->addFieldResult("u", "user_id", "userId");
-        $mapping->addFieldResult("u", "user_first_name", "userFirstName");
-        $mapping->addFieldResult("u", "user_last_name", "userLastName");
-        $mapping->addFieldResult("u", "user_email", "userEmail");
+        $mapping->addFieldResult("u", "first_name", "firstName");
+        $mapping->addFieldResult("u", "last_name", "lastName");
+        $mapping->addFieldResult("u", "email", "email");
         
         $query = $this->_em->createNativeQuery
         (
             "SELECT * FROM users " . 
-            "WHERE user_first_name = :userFirstName " .
+            "WHERE first_name = :firstName " .
             "ORDER BY user_id ASC", $mapping
         );
 
-        $query->setParameter("userFirstName", $userFirstName);
+        $query->setParameter("firstName", $firstName);
         
         return $query->getResult();
     }
 
-    function findAllByFirstNameDQL(string $userFirstName): array
+    function findAllByFirstNameDQL(string $firstName): array
     {
         $query = $this->_em->createQuery
         (
             "SELECT u FROM " . User::class . " u " .
-            "WHERE u.userFirstName = :userFirstName " .
+            "WHERE u.firstName = :firstName " .
             "ORDER BY u.user_id DESC"
         );
 
-        $query->setParameter("userFirstName", $userFirstName);
+        $query->setParameter("firstName", $firstName);
         
         return $query->getResult();
     }
 
-    function findAllByFirstNameSQL(string $userFirstName): array
+    function findAllByFirstNameSQL(string $firstName): array
     {
         $conn = $this->_em->getConnection();
 
-        $sql = "SELECT u.user_id, u.user_first_name AS firstName, u.user_last_name AS lastName, u.user_email
+        $sql = "SELECT u.user_id, u.first_name AS firstName, u.last_name AS lastName, u.email
                 FROM Users u
-                WHERE u.user_first_name = :userFirstName
-                ORDER BY u.user_first_name ASC";
+                WHERE u.first_name = :firstName
+                ORDER BY firstName ASC";
                 
         $stmt = $conn->prepare($sql);
-        $stmt->execute(["userFirstName" => $userFirstName]);
+        $stmt->execute(["firstName" => $firstName]);
     
         return $stmt->fetchAll();
     }
@@ -109,9 +109,9 @@ class UserRepository extends ServiceEntityRepository
         $mapping = new ResultSetMapping();
         $mapping->addEntityResult(User::class, "u");
         $mapping->addFieldResult("u", "user_id", "userId");
-        $mapping->addFieldResult("u", "user_first_name", "userFirstName");
-        $mapping->addFieldResult("u", "user_last_name", "userLastName");
-        $mapping->addFieldResult("u", "user_email", "userEmail");
+        $mapping->addFieldResult("u", "first_name", "firstName");
+        $mapping->addFieldResult("u", "last_name", "lastName");
+        $mapping->addFieldResult("u", "email", "email");
         
         $query = $this->_em->createNativeQuery
         (

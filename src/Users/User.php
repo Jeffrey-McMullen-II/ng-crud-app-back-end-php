@@ -18,19 +18,19 @@ class User
     private ?int $userId;
 
     /**
-     * @ORM\Column(name="user_email", type="text")
+     * @ORM\Column(name="email", type="text")
      */
-    private string $userEmail;
+    private string $email;
 
     /**
-     * @ORM\Column(name="user_first_name", type="text")
+     * @ORM\Column(name="first_name", type="text")
      */
-    private string $userFirstName;
+    private string $firstName;
 
     /**
-     * @ORM\Column(name="user_last_name", type="text")
+     * @ORM\Column(name="last_name", type="text")
      */
-    private string $userLastName;
+    private string $lastName;
 
     
 
@@ -44,33 +44,33 @@ class User
         $this->userId = $userId;
     }
 
-    public function getUserEmail(): string
+    public function getEmail(): string
     {
-        return $this->userEmail;
+        return $this->email;
     }
 
-    public function setUserEmail(string $userEmail)
+    public function setEmail(string $email)
     {
-        $this->userEmail = $userEmail;
+        $this->email = $email;
     }
 
-    public function getUserFirstName(): string
+    public function getFirstName(): string
     {
-        return $this->userFirstName;
+        return $this->firstName;
     }
 
-    public function setUserFirstName(string $userFirstName)
+    public function setFirstName(string $firstName)
     {
-        $this->userFirstName = $userFirstName;
+        $this->firstName = $firstName;
     }
 
-    public function getUserLastName(): string
+    public function getLastName(): string
     {
-        return $this->userLastName;
+        return $this->lastName;
     }
 
-    public function setUserLastName(string $userLastName)
+    public function setLastName(string $lastName)
     {
-        $this->userLastName = $userLastName;
+        $this->lastName = $lastName;
     }
 }
