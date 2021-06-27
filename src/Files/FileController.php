@@ -32,15 +32,26 @@ class FileController extends BaseController
      */
     function findImageFile(Request $request)
     {
-        $response = $this->fileService->findImageFile
+        $image = $this->fileService->findImageFile
         (
-            $request->query->get('fileName'),
-            $request->query->get('width'),
-            $request->query->get('height'),
-            $request->query->get('title')
+            $request->query->get("fileName"),
+            $request->query->get("width"),
+            $request->query->get("height"),
+            $request->query->get("title")
         );
         
-        return new Response($response);
+        $response = new Response($image);
+        
+        if ($image === null) { return new Response("404 Not Found"); }
+        
+        $age = $request->query->get("age");
+        
+        if ($age !== null)
+        {
+            $response->setCache(["private" => true, "max_age" => $age]);
+        }
+        
+        return $response;
     }
     
     /**

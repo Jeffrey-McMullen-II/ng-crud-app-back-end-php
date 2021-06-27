@@ -21,11 +21,11 @@ class FileService
         return $this->fileRepository->find($fileId);
     }
     
-    function findImageFile(string $fileName, ?string $width, ?string $height, ?string $title): string
+    function findImageFile(string $fileName, ?string $width, ?string $height, ?string $title): ?string
     {
         $fileContents = $this->fileRepository->findImageFileBy($fileName);
 
-        if ($fileContents === null) { return "404 Not Found"; }
+        if ($fileContents === null) { return null; }
         
         $image = '<img ' .
                     'src="' . $fileContents . ' "' .
