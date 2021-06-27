@@ -34,10 +34,10 @@ class FileController extends BaseController
     {
         $response = $this->fileService->findImageFile
         (
-                $request->query->get('fileName'),
-                $request->query->get('width'),
-                $request->query->get('height'),
-                $request->query->get('title')
+            $request->query->get('fileName'),
+            $request->query->get('width'),
+            $request->query->get('height'),
+            $request->query->get('title')
         );
         
         return new Response($response);
