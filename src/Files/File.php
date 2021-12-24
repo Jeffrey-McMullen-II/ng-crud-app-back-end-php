@@ -42,7 +42,7 @@ class File
         $file = new File();
         $file->setFileName($fileName);
         $file->setFileType($fileType);
-        $file->setFileContents('data:' . $fileType . ';base64,' . base64_encode($fileContents));
+        $file->setFileContents("data:" . $fileType . ";base64," . base64_encode($fileContents));
         
         return $file;
     }
