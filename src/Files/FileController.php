@@ -40,10 +40,9 @@ class FileController extends BaseController
             $request->query->get("title")
         );
         
-        $response = new Response($image);
-        
         if ($image === null) { return new Response("404 Not Found"); }
         
+        $response = new Response($image);
         $age = $request->query->get("age");
         
         if ($age !== null)
