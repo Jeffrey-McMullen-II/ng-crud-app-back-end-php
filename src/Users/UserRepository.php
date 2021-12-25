@@ -122,22 +122,4 @@ class UserRepository extends ServiceEntityRepository
 
         return $query->getResult()[0];
     }
-
-    function persist(User $user)
-    {
-        $this->_em->persist($user);
-        $this->_em->flush();
-    }
-
-    function merge(User $user)
-    {
-        $this->_em->merge($user);
-        $this->_em->flush();
-    }
-
-    function remove(User $user)
-    {
-        $this->_em->remove($user);
-        $this->_em->flush();
-    }
 }
