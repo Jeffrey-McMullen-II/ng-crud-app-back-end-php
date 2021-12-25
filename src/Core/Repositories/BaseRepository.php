@@ -12,19 +12,19 @@ class BaseRepository extends ServiceEntityRepository
         parent::__construct($registry, $className);
     }
     
-    function create($entity)
+    function create(object $entity)
     {
         $this->_em->persist($entity);
         $this->_em->flush();
     }
 
-    function update($entity)
+    function update(object $entity)
     {
         $this->_em->merge($entity);
         $this->_em->flush();
     }
 
-    function delete($entity)
+    function delete(object $entity)
     {
         $this->_em->remove($entity);
         $this->_em->flush();

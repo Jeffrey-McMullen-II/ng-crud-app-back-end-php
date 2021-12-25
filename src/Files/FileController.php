@@ -59,11 +59,11 @@ class FileController extends BaseController
      */
     function findImageFilesBy(Request $request)
     {
-        $paginationRequest = $this->toObject($request->getContent(), PaginationRequest::class);
+        $paginationRequest = $this->deserialize($request->getContent(), PaginationRequest::class);
         
         $paginationResponse = $this->fileService->findImageFilesBy($paginationRequest);
         
-        return new Response($this->toJson($paginationResponse));
+        return new Response($this->serialize($paginationResponse));
     }
 
     /**
@@ -72,11 +72,11 @@ class FileController extends BaseController
      */
     function createFile(Request $request)
     {
-        $file = $this->toObject($request->getContent(), File::class);
+        $file = $this->deserialize($request->getContent(), File::class);
         
         $this->fileService->createFile($file);
         
-        return new Response($this->toJson($file));
+        return new Response($this->serialize($file));
     }
     
     /**
@@ -94,7 +94,7 @@ class FileController extends BaseController
      */
     function updateFile(Request $request)
     {
-        $file = $this->toObject($request->getContent(), File::class);
+        $file = $this->deserialize($request->getContent(), File::class);
 
         $this->fileService->updateFile($file);
  

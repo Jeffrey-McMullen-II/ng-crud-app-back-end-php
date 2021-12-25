@@ -34,7 +34,7 @@ class UserController extends BaseController
     {
         $users = $this->userService->findAllUsersOrderByFirstName();
         
-        return new Response($this->toJson($users));
+        return new Response($this->serialize($users));
     }
     
     /**
@@ -43,11 +43,11 @@ class UserController extends BaseController
      */
     function createUser(Request $request)
     {
-        $user = $this->toObject($request->getContent(), User::class);
+        $user = $this->deserialize($request->getContent(), User::class);
         
         $this->userService->createUser($user);
         
-        return new Response($this->toJson($user));
+        return new Response($this->serialize($user));
     }
 
     /**
@@ -56,11 +56,11 @@ class UserController extends BaseController
      */
     function updateUser(Request $request)
     {
-        $user = $this->toObject($request->getContent(), User::class);
+        $user = $this->deserialize($request->getContent(), User::class);
 
         $this->userService->updateUser($user);
  
-        return new Response($this->toJson($user));
+        return new Response($this->serialize($user));
     }
 
     /**
@@ -71,6 +71,6 @@ class UserController extends BaseController
     {
         $user = $this->userService->deleteUserBy($userId);
 
-        return new Response($this->toJson($user));
+        return new Response($this->serialize($user));
     }
 }

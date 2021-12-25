@@ -30,7 +30,7 @@ class File
     /**
      * @ORM\Column(name="file_contents", type="blob")
      */
-    private /*resource | string*/ $fileContents;
+    private mixed $fileContents;
     
     
     

@@ -15,13 +15,13 @@ class BaseController extends AbstractController
         $this->jsonMapper = $jsonMapper;
     }
 
-    function toObject(string $jsonContents, string $className): object
+    function deserialize(string $content, string $className): mixed
     {
-        return $this->jsonMapper->toObject($jsonContents, $className);
+        return $this->jsonMapper->deserialize($content, $className);
     }
 
-    function toJson($content): string
+    function serialize(mixed $content): string
     {
-        return $this->jsonMapper->toJson($content);
+        return $this->jsonMapper->serialize($content);
     }
 }
