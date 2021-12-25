@@ -44,7 +44,7 @@ class FileService
 
     function createFile(File $file)
     {
-        $this->fileRepository->persist($file);
+        $this->fileRepository->create($file);
     }
     
     function transferFiles(): string
@@ -77,7 +77,7 @@ class FileService
 
     function updateFile(File $file)
     {
-        $this->fileRepository->merge($file);
+        $this->fileRepository->update($file);
     }
 
     function deleteFileBy(int $fileId): ?File
@@ -86,7 +86,7 @@ class FileService
         
         if ($file !== null)
         {
-            $this->fileRepository->remove($file);
+            $this->fileRepository->delete($file);
         }
         
         return $file;

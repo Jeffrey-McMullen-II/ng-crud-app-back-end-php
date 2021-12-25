@@ -9,3 +9,7 @@ services:
     App\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+        
+    App\Core\Repositories\BaseRepository:
+        arguments:
+            $className: "className"

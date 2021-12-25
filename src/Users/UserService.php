@@ -29,12 +29,12 @@ class UserService
 
     function findAllUsersOrderByFirstName(): array
     {
-        return $this->userRepository->findAllWithLimit();
+        return $this->userRepository->findAll();
     }
 
     function createUser(User $user)
     {
-        $this->userRepository->persist($user);
+        $this->userRepository->create($user);
 
         $userCount = $this->getCountOfUsers();
 
@@ -47,7 +47,7 @@ class UserService
 
     function updateUser(User $user)
     {
-        $this->userRepository->merge($user);
+        $this->userRepository->update($user);
     }
 
     function deleteUserBy(int $userId): User
@@ -57,7 +57,7 @@ class UserService
         if ($user !== null)
         {
             $this->logService->logInfo("Deleting user with id: " . $userId);
-            $this->userRepository->remove($user);
+            $this->userRepository->delete($user);
         }
         
         return $user;

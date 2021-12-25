@@ -2,12 +2,12 @@
 
 namespace App\Files;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\Persistence\ManagerRegistry;
 
 use App\Core\Pagination\PaginationRequest;
 use App\Core\Pagination\PaginationResponse;
+use App\Core\Repositories\BaseRepository;
 use App\Files\File;
 
 /**
@@ -16,7 +16,7 @@ use App\Files\File;
  * @method File[]    findAll()
  * @method File[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class FileRepository extends ServiceEntityRepository
+class FileRepository extends BaseRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -70,24 +70,7 @@ class FileRepository extends ServiceEntityRepository
         
         $results = $stmt->fetchAll();
         $fileCount = $results[0]["fileCount"];
+        
         return intval($fileCount);
-    }
-
-    function persist(File $file)
-    {
-        $this->_em->persist($file);
-        $this->_em->flush();
-    }
-
-    function merge(File $file)
-    {
-        $this->_em->merge($file);
-        $this->_em->flush();
-    }
-
-    function remove(File $file)
-    {
-        $this->_em->remove($file);
-        $this->_em->flush();
     }
 }

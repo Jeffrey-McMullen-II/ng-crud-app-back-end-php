@@ -39,7 +39,7 @@ class User
         return $this->userId;
     }
 
-    public function setUserId(int $userId)
+    public function setUserId(?int $userId)
     {
         $this->userId = $userId;
     }
