@@ -52,7 +52,7 @@ class FileService
         $fileCount = 0;
         $filesTransferred = "";
         
-        $directoryPath = "../../files/";
+        $directoryPath = "../../file-transfer/";
         $directoryHandle = opendir($directoryPath);
         
         while ($directoryHandle)
@@ -60,7 +60,7 @@ class FileService
             $fileName = readdir($directoryHandle);
             
             if (!$fileName) { closedir($directoryHandle); break; }
-            if (in_array($fileName, [".", ".."])) { continue; }
+            if (in_array($fileName, [".", "..", "index.html"])) { continue; }
             
             $fileCount++;
             $filesTransferred .= $fileName . "<br>";
