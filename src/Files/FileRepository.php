@@ -29,8 +29,9 @@ class FileRepository extends BaseRepository
 
         $query = "SELECT file_contents AS fileContents " .
                  "FROM files " .
-                 "WHERE file_name = :fileName " .
-                 "AND file_type IN(SELECT image_type FROM util_image_types)";
+                 "WHERE file_name LIKE '%' :fileName '%' " .
+                 "AND file_type IN(SELECT image_type FROM util_image_types) " .
+                 "LIMIT 1";
         
         $stmt = $conn->prepare($query);
         $stmt->execute(["fileName" => $fileName]);
