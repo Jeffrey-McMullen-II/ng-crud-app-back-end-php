@@ -21,20 +21,22 @@ class FileService
         return $this->fileRepository->find($fileId);
     }
     
-    function findImageFile(string $fileName, ?string $width, ?string $height, ?string $title): ?string
+    function findImageFileContentsBy(string $fileName, ?string $title): ?string
     {
-        $fileContents = $this->fileRepository->findImageFileBy($fileName);
+        $fileContents = $this->fileRepository->findImageFileContentsBy($fileName);
 
-        if ($fileContents === null) { return null; }
+        if ($fileContents === null) {
+            return '<body style="margin:0;">' . '404' . '</body>';
+        }
         
         $image = '<img ' .
-                    'src="' . $fileContents . ' "' .
-                    'width="' . ($width !== null ? $width : '200') . '" ' .
-                    'height="' . ($height !== null ? $height : '200') . '" ' .
-                    'title="' . $title . '" ' .
+                    'width=100%" ' .
+                    'height="100%" ' .
+                    ($title !== null ? 'title="' . $title . '" ' : '') .
+                    'src="' . $fileContents . '"' .
                  '/>';
         
-        return '<body style="padding:0; margin:0;">' . $image . '</body>';
+        return '<body style="margin:0;">' . $image . '</body>';
     }
     
     function findImageFilesBy(PaginationRequest $paginationRequest): PaginationResponse

@@ -27,20 +27,16 @@ class FileController extends BaseController
     }
     
     /**
-     * @Route("/images")
+     * @Route("/images/contents")
      * @Method("GET")
      */
-    function findImageFile(Request $request)
+    function findImageFileContentsBy(Request $request)
     {
-        $image = $this->fileService->findImageFile
+        $image = $this->fileService->findImageFileContentsBy
         (
             $request->query->get("fileName"),
-            $request->query->get("width"),
-            $request->query->get("height"),
             $request->query->get("title")
         );
-        
-        if ($image === null) { return new Response("404 Not Found"); }
         
         $response = new Response($image);
         $age = $request->query->get("age");

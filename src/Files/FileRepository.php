@@ -23,7 +23,7 @@ class FileRepository extends BaseRepository
         parent::__construct($registry, File::class);
     }
     
-    function findImageFileBy(string $fileName): ?string
+    function findImageFileContentsBy(string $fileName): ?string
     {
         $conn = $this->_em->getConnection();
 
