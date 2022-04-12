@@ -23,6 +23,28 @@ class FileRepository extends BaseRepository
         parent::__construct($registry, File::class);
     }
     
+    function findFileByFileName(string $fileName): ?File
+    {
+        $query = "SELECT file_id, file_name, file_type, file_contents " .
+                 "FROM files " .
+                 "WHERE file_name LIKE '%' :fileName '%' " .
+                 "AND file_type IN(SELECT image_type FROM util_image_types) " .
+                 "LIMIT 1";
+        
+        $mapping = new ResultSetMapping();
+        $mapping->addEntityResult(File::class, "file");
+        $mapping->addFieldResult("file", "file_id", "fileId");
+        $mapping->addFieldResult("file", "file_name", "fileName");
+        $mapping->addFieldResult("file", "file_type", "fileType");
+        $mapping->addFieldResult("file", "file_contents", "fileContents");
+        
+        $result = $this->_em->createNativeQuery($query, $mapping)
+                ->setParameter("fileName", $fileName)
+                ->getResult();
+        
+        return ($result !== null && count($result) > 0) ? $result[0] : null;
+    }
+    
     function findImageFileContentsBy(string $fileName): ?string
     {
         $conn = $this->_em->getConnection();

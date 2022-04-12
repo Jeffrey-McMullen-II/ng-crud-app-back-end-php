@@ -27,6 +27,26 @@ class FileController extends BaseController
     }
     
     /**
+     * @Route
+     * @Method("GET")
+     */
+    function findFileByFileName(Request $request)
+    {
+        $file = $this->fileService->findFileByFileName($request->query->get("fileName"));
+        
+        $response = new Response($this->serialize($file));
+        
+        $age = $request->query->get("age");
+        
+        if ($age !== null)
+        {
+            $response->setCache(["private" => true, "max_age" => $age]);
+        }
+
+        return $response;
+    }
+    
+    /**
      * @Route("/images/contents")
      * @Method("GET")
      */
@@ -105,6 +125,6 @@ class FileController extends BaseController
     {
         $file = $this->fileService->deleteFileBy($fileId);
 
-        return new Response($file);
+        return new Response($this->serialize($file));
     }
 }

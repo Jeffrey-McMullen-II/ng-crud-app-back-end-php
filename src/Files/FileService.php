@@ -16,9 +16,14 @@ class FileService
         $this->fileRepository = $fileRepository;
     }
 
-    function findFileBy(int $fileId): ?File
+    function findFileByFileId(int $fileId): ?File
     {
         return $this->fileRepository->find($fileId);
+    }
+    
+    function findFileByFileName(string $fileName): ?File
+    {
+        return $this->fileRepository->findFileByFileName($fileName);
     }
     
     function findImageFileContentsBy(string $fileName, ?string $title): ?string
