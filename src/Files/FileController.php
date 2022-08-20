@@ -38,10 +38,11 @@ class FileController extends BaseController
         
         $age = $request->query->get("age");
         
-        if ($age !== null)
-        {
-            $response->setCache(["private" => true, "max_age" => $age]);
-        }
+        $response->setCache
+        ([
+            "private" => true,
+            "max_age" => ($age !== null && $age >= 3600) ? $age : 3600
+        ]);
 
         return $response;
     }
@@ -59,12 +60,14 @@ class FileController extends BaseController
         );
         
         $response = new Response($image);
+        
         $age = $request->query->get("age");
         
-        if ($age !== null)
-        {
-            $response->setCache(["private" => true, "max_age" => $age]);
-        }
+        $response->setCache
+        ([
+            "private" => true,
+            "max_age" => ($age !== null && $age >= 3600) ? $age : 3600
+        ]);
         
         return $response;
     }
